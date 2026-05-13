@@ -7,6 +7,15 @@ import { Zap, Code, Package, Users, Workflow, BarChart3, Search, Lightbulb, Pale
 
 export default function Home() {
   const shouldReduceMotion = useReducedMotion();
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, shouldReduceMotion ? 0 : 2500);
+
+    return () => clearTimeout(timer);
+  }, [shouldReduceMotion]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,6 +89,7 @@ export default function Home() {
 
   return (
     <>
+    {showLoader && <Loader />}
     <section className="relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center">
       {/* Base gradient backdrop */}
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
@@ -295,6 +305,12 @@ export default function Home() {
     
     {/* Testimonials Section */}
     <TestimonialsSection shouldReduceMotion={shouldReduceMotion} />
+    
+    {/* Contact Section */}
+    <ContactSection shouldReduceMotion={shouldReduceMotion} />
+    
+    {/* Footer */}
+    <Footer />
     </>
   );
 }
@@ -1443,10 +1459,21 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
   const [isPaused, setIsPaused] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [itemsPerSlide, setItemsPerSlide] = useState(1);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const itemsPerSlide = typeof window !== 'undefined' && window.innerWidth >= 1024 ? 2 : 1;
   const totalSlides = Math.ceil(testimonials.length / itemsPerSlide);
+
+  // Set items per slide on mount and resize
+  useEffect(() => {
+    const calculateItemsPerSlide = () => {
+      setItemsPerSlide(window.innerWidth >= 1024 ? 2 : 1);
+    };
+
+    calculateItemsPerSlide();
+    window.addEventListener('resize', calculateItemsPerSlide);
+    return () => window.removeEventListener('resize', calculateItemsPerSlide);
+  }, []);
 
   // Auto-slide effect
   useEffect(() => {
@@ -1774,6 +1801,844 @@ function TestimonialCard({ testimonial, shouldReduceMotion }: any) {
           className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px bg-linear-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_8px_rgba(59,130,246,0.4)] origin-center"
         />
       </motion.div>
+    </motion.div>
+  );
+}
+
+function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.6,
+        ease: easeOut,
+      },
+    },
+  };
+
+  return (
+    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+      {/* Background decorative elements */}
+      {/* Primary glow orb - top left */}
+      <motion.div
+        animate={{
+          opacity: [0.2, 0.35, 0.2],
+          scale: [1, 1.12, 1],
+          x: [0, 20, 0],
+        }}
+        transition={{ duration: shouldReduceMotion ? 0 : 10, repeat: Infinity, ease: easeInOut }}
+        className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
+      />
+
+      {/* Secondary glow orb - bottom right */}
+      <motion.div
+        animate={{
+          opacity: [0.15, 0.3, 0.15],
+          scale: [1, 1.15, 1],
+          x: [0, -25, 0],
+        }}
+        transition={{ duration: shouldReduceMotion ? 0 : 12, repeat: Infinity, delay: 2, ease: easeInOut }}
+        className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-blue-500/8 blur-3xl pointer-events-none"
+      />
+
+      {/* Grid background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-20" />
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Main container with split layout */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+        >
+          {/* Left side - Contact info */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            {/* Premium label */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30">
+              <span className="text-xs font-semibold uppercase tracking-widest text-cyan-400">Get in Touch</span>
+            </div>
+
+            {/* Main heading */}
+            <motion.h2 variants={itemVariants} className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+              Let's Build{' '}
+              <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+                Something Great
+              </span>
+            </motion.h2>
+
+            {/* Subtitle */}
+            <motion.p variants={itemVariants} className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-xl">
+              Have a project in mind? Let's discuss how CloudFlow can help bring your vision to life. Reach out and let's create something amazing together.
+            </motion.p>
+
+            {/* Contact details */}
+            <motion.div variants={itemVariants} className="space-y-6 pt-4">
+              {/* Email */}
+              <div className="flex items-start gap-4 group">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-cyan-500/30 to-blue-500/20 text-xl">
+                  ✉
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-400 mb-1">Email</p>
+                  <motion.a
+                    href="mailto:hello@cloudflow.dev"
+                    whileHover={{ x: 4 }}
+                    className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300"
+                  >
+                    hello@cloudflow.dev
+                  </motion.a>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-start gap-4 group">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-blue-500/30 to-purple-500/20 text-xl">
+                  📞
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-400 mb-1">Phone</p>
+                  <motion.a
+                    href="tel:+1234567890"
+                    whileHover={{ x: 4 }}
+                    className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors duration-300"
+                  >
+                    +1 (234) 567-890
+                  </motion.a>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-start gap-4">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-purple-500/30 to-pink-500/20 text-xl">
+                  📍
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-400 mb-1">Location</p>
+                  <p className="text-lg font-semibold text-white">San Francisco, CA</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Response time info */}
+            <motion.div variants={itemVariants} className="pt-4 border-t border-white/10">
+              <p className="text-sm text-zinc-400">
+                <span className="inline-flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                  Typically respond within 24 hours
+                </span>
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Right side - Contact form */}
+          <motion.div variants={itemVariants}>
+            <ContactForm shouldReduceMotion={shouldReduceMotion} />
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function ContactForm({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    budget: '',
+    service: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const budgetOptions = [
+    { value: '$5k-$10k', label: '$5k - $10k' },
+    { value: '$10k-$25k', label: '$10k - $25k' },
+    { value: '$25k-$50k', label: '$25k - $50k' },
+    { value: '$50k+', label: '$50k+' },
+  ];
+
+  const serviceOptions = [
+    { value: 'web-development', label: 'Web Development' },
+    { value: 'mobile-app', label: 'Mobile App' },
+    { value: 'saas-platform', label: 'SaaS Platform' },
+    { value: 'consulting', label: 'Consulting' },
+    { value: 'other', label: 'Other' },
+  ];
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    if (formData.name && formData.email && formData.message) {
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', budget: '', service: '', message: '' });
+    } else {
+      setSubmitStatus('error');
+    }
+
+    setIsSubmitting(false);
+    setTimeout(() => setSubmitStatus('idle'), 3000);
+  };
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.6,
+        ease: easeOut,
+      },
+    },
+  };
+
+  return (
+    <motion.form
+      onSubmit={handleSubmit}
+      variants={formVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="space-y-6"
+    >
+      {/* Name input */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
+        <label className="block text-sm font-medium text-zinc-300 mb-2">Full Name</label>
+        <motion.input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="John Doe"
+          whileFocus={{ scale: 1.02 }}
+          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
+        />
+      </motion.div>
+
+      {/* Email input */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <label className="block text-sm font-medium text-zinc-300 mb-2">Email Address</label>
+        <motion.input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="john@example.com"
+          whileFocus={{ scale: 1.02 }}
+          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
+        />
+      </motion.div>
+
+      {/* Budget and Service dropdowns */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Budget dropdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <label className="block text-sm font-medium text-zinc-300 mb-2">Project Budget</label>
+          <motion.select
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
+            whileFocus={{ scale: 1.02 }}
+            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl appearance-none cursor-pointer"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322d3ee' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 12px center',
+              paddingRight: '36px',
+            }}
+          >
+            <option value="" disabled className="bg-zinc-900 text-white">
+              Select budget
+            </option>
+            {budgetOptions.map((option) => (
+              <option key={option.value} value={option.value} className="bg-zinc-900 text-white">
+                {option.label}
+              </option>
+            ))}
+          </motion.select>
+        </motion.div>
+
+        {/* Service type dropdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <label className="block text-sm font-medium text-zinc-300 mb-2">Service Type</label>
+          <motion.select
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            whileFocus={{ scale: 1.02 }}
+            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl appearance-none cursor-pointer"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322d3ee' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 12px center',
+              paddingRight: '36px',
+            }}
+          >
+            <option value="" disabled className="bg-zinc-900 text-white">
+              Select service
+            </option>
+            {serviceOptions.map((option) => (
+              <option key={option.value} value={option.value} className="bg-zinc-900 text-white">
+                {option.label}
+              </option>
+            ))}
+          </motion.select>
+        </motion.div>
+      </div>
+
+      {/* Message textarea */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <label className="block text-sm font-medium text-zinc-300 mb-2">Message</label>
+        <motion.textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Tell us about your project..."
+          rows={5}
+          whileFocus={{ scale: 1.02 }}
+          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl resize-none"
+        />
+      </motion.div>
+
+      {/* Submit button */}
+      <motion.button
+        type="submit"
+        disabled={isSubmitting || submitStatus === 'success'}
+        whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+        whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.6 }}
+        viewport={{ once: true }}
+        className="w-full px-6 py-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-500 text-white font-semibold hover:shadow-[0_0_24px_rgba(34,211,238,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+      >
+        {isSubmitting ? (
+          <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }}>
+            Sending...
+          </motion.span>
+        ) : submitStatus === 'success' ? (
+          'Message Sent! 🎉'
+        ) : (
+          'Send Message'
+        )}
+      </motion.button>
+
+      {/* Status messages */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: submitStatus !== 'idle' ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className={`p-4 rounded-lg text-center text-sm font-medium ${
+          submitStatus === 'success'
+            ? 'bg-green-500/10 text-green-300 border border-green-500/30'
+            : submitStatus === 'error'
+              ? 'bg-red-500/10 text-red-300 border border-red-500/30'
+              : 'hidden'
+        }`}
+      >
+        {submitStatus === 'success' && "We've received your message! We'll get back to you soon."}
+        {submitStatus === 'error' && 'Please fill in all required fields.'}
+      </motion.div>
+    </motion.form>
+  );
+}
+
+function Footer() {
+  const [emailInput, setEmailInput] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleNewsletterSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!emailInput) {
+      setNewsletterStatus('error');
+      setTimeout(() => setNewsletterStatus('idle'), 3000);
+      return;
+    }
+
+    // Simulate subscription
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setNewsletterStatus('success');
+    setEmailInput('');
+    setTimeout(() => setNewsletterStatus('idle'), 3000);
+  };
+
+  const footerLinks = {
+    company: [
+      { name: 'About', href: '#' },
+      { name: 'Blog', href: '#' },
+      { name: 'Careers', href: '#' },
+      { name: 'Press', href: '#' },
+    ],
+    services: [
+      { name: 'Web Development', href: '#' },
+      { name: 'Mobile Apps', href: '#' },
+      { name: 'SaaS Solutions', href: '#' },
+      { name: 'Consulting', href: '#' },
+    ],
+    resources: [
+      { name: 'Documentation', href: '#' },
+      { name: 'API Reference', href: '#' },
+      { name: 'Support Center', href: '#' },
+      { name: 'Community', href: '#' },
+    ],
+    legal: [
+      { name: 'Privacy Policy', href: '#' },
+      { name: 'Terms of Service', href: '#' },
+      { name: 'Cookie Policy', href: '#' },
+      { name: 'Security', href: '#' },
+    ],
+  };
+
+  const socialLinks = [
+    { icon: 'Twitter', href: '#', label: 'Follow on Twitter' },
+    { icon: 'LinkedIn', href: '#', label: 'Connect on LinkedIn' },
+    { icon: 'GitHub', href: '#', label: 'Star on GitHub' },
+    { icon: 'Instagram', href: '#', label: 'Follow on Instagram' },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: easeOut },
+    },
+  };
+
+  return (
+    <footer className="relative w-full bg-zinc-950 border-t border-white/5">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{
+            opacity: [0.1, 0.2, 0.1],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: easeInOut }}
+          className="absolute -top-1/2 right-1/4 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl"
+        />
+        <motion.div
+          animate={{
+            opacity: [0.05, 0.15, 0.05],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, delay: 2, ease: easeInOut }}
+          className="absolute bottom-1/4 left-1/3 w-80 h-80 rounded-full bg-cyan-500/8 blur-3xl"
+        />
+      </div>
+
+      {/* Main footer content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 mb-16"
+        >
+          {/* Brand Section */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
+                CloudFlow
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Building premium digital solutions for ambitious companies. Innovation, quality, and excellence in every project.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div variants={itemVariants}>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Company</h4>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 4 }}
+                    className="text-sm text-zinc-400 hover:text-cyan-300 transition-colors duration-300 inline-flex items-center gap-2"
+                  >
+                    {link.name}
+                    <motion.span whileHover={{ x: 2 }} className="text-xs">
+                      →
+                    </motion.span>
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services */}
+          <motion.div variants={itemVariants}>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Services</h4>
+            <ul className="space-y-3">
+              {footerLinks.services.map((link) => (
+                <li key={link.name}>
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 4 }}
+                    className="text-sm text-zinc-400 hover:text-cyan-300 transition-colors duration-300 inline-flex items-center gap-2"
+                  >
+                    {link.name}
+                    <motion.span whileHover={{ x: 2 }} className="text-xs">
+                      →
+                    </motion.span>
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Resources */}
+          <motion.div variants={itemVariants}>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Resources</h4>
+            <ul className="space-y-3">
+              {footerLinks.resources.map((link) => (
+                <li key={link.name}>
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 4 }}
+                    className="text-sm text-zinc-400 hover:text-cyan-300 transition-colors duration-300 inline-flex items-center gap-2"
+                  >
+                    {link.name}
+                    <motion.span whileHover={{ x: 2 }} className="text-xs">
+                      →
+                    </motion.span>
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Newsletter */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Newsletter</h4>
+            <p className="text-sm text-zinc-400 mb-4">Stay updated with the latest from CloudFlow.</p>
+            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+              <div className="relative group">
+                <motion.input
+                  type="email"
+                  value={emailInput}
+                  onChange={(e: any) => setEmailInput(e.target.value)}
+                  placeholder="Enter email"
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
+                />
+              </div>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full px-4 py-2 rounded-lg bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:shadow-[0_0_16px_rgba(34,211,238,0.4)] transition-all duration-300"
+              >
+                Subscribe
+              </motion.button>
+            </form>
+            {newsletterStatus === 'success' && (
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-green-400 mt-2">
+                ✓ Subscribed!
+              </motion.p>
+            )}
+            {newsletterStatus === 'error' && (
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-red-400 mt-2">
+                Please enter a valid email
+              </motion.p>
+            )}
+          </motion.div>
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent mb-8 origin-left"
+        />
+
+        {/* Bottom section - Social links and Copyright */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row justify-between items-center gap-6"
+        >
+          {/* Social links */}
+          <motion.div variants={itemVariants} className="flex gap-4">
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
+              title="Twitter"
+            >
+              <span className="text-lg">𝕏</span>
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
+              title="LinkedIn"
+            >
+              <span className="text-lg">💼</span>
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
+              title="GitHub"
+            >
+              <span className="text-lg">⚙️</span>
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-cyan-400 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
+              title="Instagram"
+            >
+              <span className="text-lg">📸</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Copyright */}
+          <motion.div variants={itemVariants} className="text-center sm:text-right">
+            <p className="text-xs text-zinc-500">
+              © 2024 CloudFlow. All rights reserved.{' '}
+              <motion.a
+                href="#"
+                whileHover={{ textDecoration: 'underline' }}
+                className="text-cyan-400/60 hover:text-cyan-400 transition-colors"
+              >
+                Privacy
+              </motion.a>
+              {' '} • {' '}
+              <motion.a
+                href="#"
+                whileHover={{ textDecoration: 'underline' }}
+                className="text-cyan-400/60 hover:text-cyan-400 transition-colors"
+              >
+                Terms
+              </motion.a>
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Bottom gradient accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent" />
+    </footer>
+  );
+}
+
+function Loader() {
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: easeOut }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
+    >
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Animated gradient orbs */}
+        <motion.div
+          animate={{
+            opacity: [0.15, 0.3, 0.15],
+            scale: [0.8, 1.2, 0.8],
+            rotate: [0, 180, 360],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: easeInOut }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-linear-to-br from-cyan-500 to-blue-500 blur-3xl opacity-20"
+        />
+        <motion.div
+          animate={{
+            opacity: [0.1, 0.25, 0.1],
+            scale: [1, 1.3, 1],
+            rotate: [360, 180, 0],
+          }}
+          transition={{ duration: 10, repeat: Infinity, delay: 1, ease: easeInOut }}
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-linear-to-br from-blue-500 to-purple-500 blur-3xl opacity-15"
+        />
+
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.05)_1px,transparent_1px)] bg-size-[50px_50px] opacity-40" />
+      </div>
+
+      {/* Center content */}
+      <div className="relative z-10 flex flex-col items-center justify-center gap-8">
+        {/* Animated logo/rings */}
+        <div className="relative w-40 h-40 flex items-center justify-center">
+          {/* Outer pulsing ring */}
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.8, 0.2, 0.8],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: easeInOut }}
+            className="absolute inset-0 rounded-full border-2 border-cyan-400/40 blur-sm"
+          />
+
+          {/* Middle rotating ring */}
+          <motion.div
+            animate={{
+              rotate: 360,
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-8 rounded-full border border-cyan-400/30 border-t-cyan-400 border-r-cyan-400/50 border-b-transparent border-l-transparent"
+          />
+
+          {/* Inner pulsing ring */}
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.6, 0.3, 0.6],
+            }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: easeInOut }}
+            className="absolute inset-16 rounded-full border-2 border-blue-400/30"
+          />
+
+          {/* Center logo with shimmer */}
+          <motion.div
+            animate={{
+              scale: [1, 1.05, 1],
+              opacity: [0.9, 1, 0.9],
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
+            className="relative flex items-center justify-center w-20 h-20"
+          >
+            <div className="text-4xl font-bold bg-linear-to-br from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+              ⚡
+            </div>
+
+            {/* Shimmer effect overlay */}
+            <motion.div
+              animate={{
+                x: [-100, 100],
+                opacity: [0, 0.5, 0],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: easeInOut }}
+              className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent blur-sm rounded-full"
+            />
+          </motion.div>
+        </div>
+
+        {/* Loading text */}
+        <div className="flex flex-col items-center gap-4">
+          <motion.h2
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
+            className="text-2xl font-bold text-white text-center"
+          >
+            CloudFlow
+          </motion.h2>
+
+          {/* Animated dots */}
+          <div className="flex gap-2 h-2">
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
+              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
+            />
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
+              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
+            />
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
+              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
+            />
+          </div>
+
+          {/* Loading message */}
+          <motion.p
+            animate={{ opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
+            className="text-xs uppercase tracking-widest text-zinc-400 mt-4"
+          >
+            Loading premium experience...
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Fade out background */}
+      <motion.div
+        animate={{ opacity: [0, 0, 0] }}
+        transition={{ duration: 2.5, times: [0, 0.9, 1] }}
+        className="absolute inset-0 bg-zinc-950 pointer-events-none"
+      />
     </motion.div>
   );
 }
