@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion, easeOut, easeInOut, useMotionValue, useTransform } from 'framer-motion';
 import { Zap, Code, Package, Users, Workflow, BarChart3, Search, Lightbulb, Palette, Rocket, CheckCircle, Headphones } from 'lucide-react';
+import { scrollToSection } from '@/lib/scrollToSection';
 
 export default function Home() {
   const shouldReduceMotion = useReducedMotion();
@@ -90,29 +91,29 @@ export default function Home() {
   return (
     <>
     {showLoader && <Loader />}
-    <section className="relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center">
+    <section id="home" data-cloudflow-hero className="cloudflow-hero relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center scroll-mt-28 sm:scroll-mt-32">
       {/* Base gradient backdrop */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
+      <div className="cloudflow-hero-backdrop absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
 
       {/* Large primary glow orb - floating */}
       <motion.div
         variants={driftVariants}
         animate="animate"
-        className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"
+        className="cloudflow-hero-glow cloudflow-hero-glow-primary absolute -top-40 -left-40 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"
       />
 
       {/* Secondary glow orb - drifting */}
       <motion.div
         variants={slowDriftVariants}
         animate="animate"
-        className="absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-blue-600/12 blur-3xl pointer-events-none"
+        className="cloudflow-hero-glow cloudflow-hero-glow-secondary absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-blue-600/12 blur-3xl pointer-events-none"
       />
 
       {/* Tertiary accent orb - floating */}
       <motion.div
         variants={floatingVariants}
         animate="animate"
-        className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
+        className="cloudflow-hero-glow cloudflow-hero-glow-accent absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
       />
 
       {/* Accent light ray - top right */}
@@ -122,31 +123,31 @@ export default function Home() {
           scale: [1, 1.1, 1],
         }}
         transition={{ duration: shouldReduceMotion ? 0 : 6, repeat: Infinity, ease: easeInOut }}
-        className="absolute -top-20 right-1/4 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"
+        className="cloudflow-hero-light-ray absolute -top-20 right-1/4 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"
       />
 
       {/* Ambient glow - center */}
       <motion.div
         variants={pulseVariants}
         animate="animate"
-        className="absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-cyan-400/8 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        className="cloudflow-hero-ambient absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-cyan-400/8 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"
       />
 
       {/* Grid background with gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.04)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-50" />
+      <div className="cloudflow-hero-grid absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.04)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-50" />
 
       {/* Radial fade overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] pointer-events-none" />
+      <div className="cloudflow-hero-vignette absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] pointer-events-none" />
 
       {/* Subtle animated light streaks */}
       <motion.div
         animate={{ opacity: [0.05, 0.15, 0.05] }}
         transition={{ duration: shouldReduceMotion ? 0 : 7, repeat: Infinity, ease: easeInOut }}
-        className="absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(34,211,238,0.03)_50%,transparent_100%)] pointer-events-none"
+        className="cloudflow-hero-streaks absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(34,211,238,0.03)_50%,transparent_100%)] pointer-events-none"
       />
 
       {/* Floating particles effect - top layer */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="cloudflow-hero-particles absolute inset-0 pointer-events-none">
         {/* Particle 1 */}
         <motion.div
           animate={{
@@ -189,7 +190,7 @@ export default function Home() {
         {/* Badge */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8"
+          className="cloudflow-hero-badge inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
@@ -201,7 +202,7 @@ export default function Home() {
         {/* Main headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6"
+          className="cloudflow-hero-title text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6"
         >
           Build Smarter{' '}
           <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
@@ -213,7 +214,7 @@ export default function Home() {
         {/* Subheading */}
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="cloudflow-hero-copy text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           We create automation systems, AI solutions, and premium web platforms that help businesses scale faster.
         </motion.p>
@@ -221,25 +222,26 @@ export default function Home() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
+          className="cloudflow-hero-actions flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
         >
           {/* Primary CTA Button */}
           <motion.div
             whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="w-full sm:w-auto"
+            className="cloudflow-hero-primary-wrap w-full sm:w-auto"
           >
             <div className="relative group">
               {/* Glow background */}
               <div className="absolute inset-0 rounded-full bg-linear-to-r from-cyan-500/50 via-blue-500/50 to-cyan-500/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               
-              <Link
-                href="/#contact"
-                className="relative inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-r from-cyan-600/95 via-blue-600/95 to-cyan-700/95 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white shadow-[0_8px_32px_rgba(34,211,238,0.3)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.5)] transition-all duration-300 hover:border-cyan-400/50 backdrop-blur-sm"
+              <button
+                type="button"
+                onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
+                className="cloudflow-hero-primary-cta relative inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-r from-cyan-600/95 via-blue-600/95 to-cyan-700/95 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white shadow-[0_8px_32px_rgba(34,211,238,0.3)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.5)] transition-all duration-300 hover:border-cyan-400/50 backdrop-blur-sm"
               >
                 <span className="relative">Start Project</span>
-              </Link>
+              </button>
             </div>
           </motion.div>
 
@@ -248,18 +250,19 @@ export default function Home() {
             whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="w-full sm:w-auto"
+            className="cloudflow-hero-secondary-wrap w-full sm:w-auto"
           >
             <div className="relative group">
               {/* Subtle glow background */}
               <div className="absolute inset-0 rounded-full bg-linear-to-r from-sky-400/30 via-cyan-400/30 to-blue-400/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               
-              <Link
-                href="/#projects"
-                className="relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white/95 backdrop-blur-md transition-all duration-300 hover:bg-white/12 hover:border-white/35 hover:text-white shadow-[0_8px_32px_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(34,211,238,0.15)]"
+              <button
+                type="button"
+                onClick={() => scrollToSection('projects', shouldReduceMotion ? 'auto' : 'smooth')}
+                className="cloudflow-hero-secondary-cta relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white/95 backdrop-blur-md transition-all duration-300 hover:bg-white/12 hover:border-white/35 hover:text-white shadow-[0_8px_32px_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(34,211,238,0.15)]"
               >
                 <span className="relative">View Work</span>
-              </Link>
+              </button>
             </div>
           </motion.div>
         </motion.div>
@@ -267,7 +270,7 @@ export default function Home() {
         {/* Features brief */}
         <motion.div
           variants={itemVariants}
-          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-white/10"
+          className="cloudflow-hero-metrics mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-white/10"
         >
           <div className="text-center">
             <div className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
@@ -293,6 +296,9 @@ export default function Home() {
 
     {/* Stats Section */}
     <StatsSection shouldReduceMotion={shouldReduceMotion} />
+
+    {/* About Section */}
+    <AboutSection shouldReduceMotion={shouldReduceMotion} />
     
     {/* Services Section */}
     <ServicesSection shouldReduceMotion={shouldReduceMotion} />
@@ -347,7 +353,7 @@ function StatsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | nu
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+    <section id="stats" className="cloudflow-section cloudflow-section--stats relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -484,6 +490,115 @@ function StatCard({ stat, index, itemVariants, shouldReduceMotion }: any) {
   );
 }
 
+function AboutSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.55,
+        ease: easeOut,
+      },
+    },
+  };
+
+  const principles = [
+    {
+      title: 'Strategy first',
+      description: 'Every build starts with a clear plan aligned to business goals, not just visual polish.',
+    },
+    {
+      title: 'Clean execution',
+      description: 'We ship premium systems with maintainable structure, fast performance, and strong UX.',
+    },
+    {
+      title: 'Long-term support',
+      description: 'CloudFlow is built to grow with your team, from launch to ongoing optimization.',
+    },
+  ];
+
+  return (
+    <section id="about" className="cloudflow-section cloudflow-section--about relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.05)_0%,transparent_55%)] pointer-events-none" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+        >
+          <motion.div variants={itemVariants} className="space-y-6">
+            <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/30 bg-cyan-950/40 px-4 py-2 backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">About CloudFlow</span>
+            </div>
+
+            <h2 id="about-title" className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white scroll-mt-28 sm:scroll-mt-32">
+              Modern systems for teams that want to move faster.
+            </h2>
+
+            <p className="max-w-2xl text-lg sm:text-xl leading-relaxed text-zinc-300">
+              CloudFlow builds premium digital platforms, automation workflows, and AI-enabled experiences that help ambitious companies scale with clarity and confidence.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              {[
+                { value: '50+', label: 'Projects' },
+                { value: '98%', label: 'Satisfaction' },
+                { value: '24/7', label: 'Support' },
+              ].map((metric) => (
+                <div key={metric.label} className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
+                  <div className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    {metric.value}
+                  </div>
+                  <div className="mt-1 text-sm text-zinc-400">{metric.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="grid gap-4">
+            {principles.map((principle, index) => (
+              <motion.div
+                key={principle.title}
+                whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+                transition={{ duration: 0.25 }}
+                className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-cyan-500/20 to-blue-500/20 text-sm font-semibold text-cyan-200">
+                    0{index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white">{principle.title}</h3>
+                    <p className="mt-2 text-sm sm:text-base leading-relaxed text-zinc-400">{principle.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function ServicesSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
   const services = [
     {
@@ -542,7 +657,7 @@ function ServicesSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+    <section id="services" className="cloudflow-section cloudflow-section--services relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -588,8 +703,9 @@ function ServicesSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
 
           {/* Main heading */}
           <motion.div
+            id="services-title"
             variants={itemVariants}
-            className="mb-6 sm:mb-8"
+            className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
               Comprehensive{' '}
@@ -799,7 +915,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+    <section id="projects" className="cloudflow-section cloudflow-section--projects relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -845,8 +961,9 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
 
           {/* Main heading */}
           <motion.div
+            id="projects-title"
             variants={itemVariants}
-            className="mb-6 sm:mb-8"
+            className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
               Our Latest{' '}
@@ -1076,7 +1193,7 @@ function ProcessSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+    <section id="process" className="cloudflow-section cloudflow-section--process relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       {/* Primary cyan orb - top left */}
       <motion.div
@@ -1157,8 +1274,9 @@ function ProcessSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
 
           {/* Main heading */}
           <motion.div
+            id="process-title"
             variants={itemVariants}
-            className="mb-6 sm:mb-8"
+            className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
               How We{' '}
@@ -1537,7 +1655,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
+    <section id="testimonials" className="cloudflow-section cloudflow-section--testimonials relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       {/* Primary glow orb - top right */}
       <motion.div
@@ -1580,7 +1698,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
           </motion.div>
 
           {/* Main heading */}
-          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <motion.h2 id="testimonials-title" variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 scroll-mt-28 sm:scroll-mt-32">
             Trusted by Leading{' '}
             <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
               Companies
@@ -1817,6 +1935,14 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
     },
   };
 
+  const trustSignals = [
+    { label: 'Response', value: '24h' },
+    { label: 'Availability', value: 'Mon-Fri' },
+    { label: 'Satisfaction', value: '98%' },
+  ];
+
+  const supportLogos = ['TechVenture', 'NovaLabs', 'Helio', 'ArcOne'];
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -1830,124 +1956,120 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden">
-      {/* Background decorative elements */}
-      {/* Primary glow orb - top left */}
+    <section id="contact" className="cloudflow-section cloudflow-section--contact relative w-full overflow-hidden bg-zinc-950 py-24 sm:py-36 scroll-mt-28 sm:scroll-mt-32">
       <motion.div
-        animate={{
-          opacity: [0.2, 0.35, 0.2],
-          scale: [1, 1.12, 1],
-          x: [0, 20, 0],
-        }}
-        transition={{ duration: shouldReduceMotion ? 0 : 10, repeat: Infinity, ease: easeInOut }}
-        className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
+        animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.08, 1], x: [0, 24, 0], y: [0, -18, 0] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 12, repeat: Infinity, ease: easeInOut }}
+        className="pointer-events-none absolute -top-28 -left-32 h-80 w-80 rounded-full bg-cyan-500/15 blur-3xl"
       />
-
-      {/* Secondary glow orb - bottom right */}
       <motion.div
-        animate={{
-          opacity: [0.15, 0.3, 0.15],
-          scale: [1, 1.15, 1],
-          x: [0, -25, 0],
-        }}
-        transition={{ duration: shouldReduceMotion ? 0 : 12, repeat: Infinity, delay: 2, ease: easeInOut }}
-        className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-blue-500/8 blur-3xl pointer-events-none"
+        animate={{ opacity: [0.12, 0.24, 0.12], scale: [1, 1.1, 1], x: [0, -20, 0], y: [0, 18, 0] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 14, repeat: Infinity, delay: 1.5, ease: easeInOut }}
+        className="pointer-events-none absolute -bottom-32 -right-24 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"
       />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.06)_0%,transparent_45%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.06)_0%,transparent_40%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[48px_48px] opacity-20 pointer-events-none" />
 
-      {/* Grid background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-20" />
-
-      {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Main container with split layout */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          viewport={{ once: true, amount: 0.18 }}
+          className="grid grid-cols-1 gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10"
         >
-          {/* Left side - Contact info */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            {/* Premium label */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30">
-              <span className="text-xs font-semibold uppercase tracking-widest text-cyan-400">Get in Touch</span>
-            </div>
+          <motion.div variants={itemVariants} className="relative overflow-hidden rounded-4xl border border-white/10 bg-white/5 p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl">
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(34,211,238,0.12),transparent_35%,rgba(59,130,246,0.08))] pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/60 to-transparent" />
 
-            {/* Main heading */}
-            <motion.h2 variants={itemVariants} className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              Let's Build{' '}
-              <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-                Something Great
-              </span>
-            </motion.h2>
-
-            {/* Subtitle */}
-            <motion.p variants={itemVariants} className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-xl">
-              Have a project in mind? Let's discuss how CloudFlow can help bring your vision to life. Reach out and let's create something amazing together.
-            </motion.p>
-
-            {/* Contact details */}
-            <motion.div variants={itemVariants} className="space-y-6 pt-4">
-              {/* Email */}
-              <div className="flex items-start gap-4 group">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-cyan-500/30 to-blue-500/20 text-xl">
-                  ✉
-                </div>
-                <div>
-                  <p className="text-sm text-zinc-400 mb-1">Email</p>
-                  <motion.a
-                    href="mailto:hello@cloudflow.dev"
-                    whileHover={{ x: 4 }}
-                    className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300"
-                  >
-                    hello@cloudflow.dev
-                  </motion.a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex items-start gap-4 group">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-blue-500/30 to-purple-500/20 text-xl">
-                  📞
-                </div>
-                <div>
-                  <p className="text-sm text-zinc-400 mb-1">Phone</p>
-                  <motion.a
-                    href="tel:+1234567890"
-                    whileHover={{ x: 4 }}
-                    className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors duration-300"
-                  >
-                    +1 (234) 567-890
-                  </motion.a>
-                </div>
-              </div>
-
-              {/* Location */}
-              <div className="flex items-start gap-4">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-purple-500/30 to-pink-500/20 text-xl">
-                  📍
-                </div>
-                <div>
-                  <p className="text-sm text-zinc-400 mb-1">Location</p>
-                  <p className="text-lg font-semibold text-white">San Francisco, CA</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Response time info */}
-            <motion.div variants={itemVariants} className="pt-4 border-t border-white/10">
-              <p className="text-sm text-zinc-400">
-                <span className="inline-flex items-center gap-2">
-                  <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                  Typically respond within 24 hours
+            <div className="relative space-y-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-950/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200 backdrop-blur-sm">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+                  Get in Touch
                 </span>
-              </p>
-            </motion.div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur-sm">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Available for new projects
+                </span>
+              </div>
+
+              <div className="space-y-5">
+                <motion.h2 id="contact-title" variants={itemVariants} className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                  Build something premium with CloudFlow.
+                </motion.h2>
+                <motion.p variants={itemVariants} className="max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
+                  Tell us what you are building. We will review your project, respond quickly, and recommend the best path from concept to launch.
+                </motion.p>
+              </div>
+
+              <motion.div variants={itemVariants} className="grid gap-4 sm:grid-cols-3">
+                {trustSignals.map((signal) => (
+                  <div key={signal.label} className="rounded-2xl border border-white/10 bg-zinc-950/40 p-4 backdrop-blur-xl">
+                    <div className="text-xs uppercase tracking-[0.24em] text-zinc-500">{signal.label}</div>
+                    <div className="mt-2 text-xl font-semibold text-white">{signal.value}</div>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="grid gap-4 rounded-3xl border border-white/10 bg-black/20 p-5 backdrop-blur-xl sm:grid-cols-2">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-200 shadow-[0_0_24px_rgba(34,211,238,0.15)]">
+                    ✉
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Email</p>
+                    <a href="mailto:hello@cloudflow.dev" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-cyan-300">
+                      hello@cloudflow.dev
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-400/20 bg-blue-500/10 text-blue-200 shadow-[0_0_24px_rgba(59,130,246,0.15)]">
+                    📞
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Phone</p>
+                    <a href="tel:+1234567890" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-blue-300">
+                      +1 (234) 567-890
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 sm:col-span-2">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-200 shadow-[0_0_24px_rgba(217,70,239,0.12)]">
+                    📍
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Location</p>
+                    <p className="mt-1 font-medium text-white">San Francisco, CA</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-200">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+                  Typical response within 24 hours
+                </span>
+                <span className="text-sm text-zinc-400">Secure handling. No spam. Professional follow-up.</span>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="space-y-3 border-t border-white/10 pt-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">Trusted by teams like</p>
+                <div className="flex flex-wrap gap-3">
+                  {supportLogos.map((name) => (
+                    <span key={name} className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-xl">
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
 
-          {/* Right side - Contact form */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="relative overflow-hidden rounded-4xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl sm:p-5 lg:p-6">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.16),transparent_40%)] pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/60 to-transparent" />
             <ContactForm shouldReduceMotion={shouldReduceMotion} />
           </motion.div>
         </motion.div>
@@ -1982,6 +2104,20 @@ function ContactForm({ shouldReduceMotion }: { shouldReduceMotion: boolean | nul
     { value: 'other', label: 'Other' },
   ];
 
+  const focusStyles =
+    'peer w-full rounded-2xl border border-white/10 bg-zinc-950/55 px-4 pb-3 pt-6 text-white placeholder-transparent outline-none transition-all duration-300 backdrop-blur-xl focus:border-cyan-400/50 focus:bg-zinc-950/75 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.15),0_16px_40px_rgba(0,0,0,0.22)] focus:ring-0';
+
+  const labelStyles =
+    'pointer-events-none absolute left-4 top-4 origin-left text-sm text-zinc-400 transition-all duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-zinc-500 peer-focus:top-4 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.24em] peer-focus:text-cyan-200';
+
+  const getSelectLabelStyles = (value: string) =>
+    [
+      'pointer-events-none absolute left-4 origin-left text-sm transition-all duration-300',
+      value
+        ? 'top-4 translate-y-0 text-xs uppercase tracking-[0.24em] text-cyan-200'
+        : 'top-1/2 -translate-y-1/2 text-base text-zinc-500',
+    ].join(' ');
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -1997,6 +2133,7 @@ function ContactForm({ shouldReduceMotion }: { shouldReduceMotion: boolean | nul
 
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 2000));
+
 
     if (formData.name && formData.email && formData.message) {
       setSubmitStatus('success');
@@ -2027,172 +2164,171 @@ function ContactForm({ shouldReduceMotion }: { shouldReduceMotion: boolean | nul
       variants={formVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
-      className="space-y-6"
+      viewport={{ once: true, amount: 0.3 }}
+      className="space-y-6 rounded-[1.75rem] border border-white/10 bg-zinc-950/55 p-5 sm:p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
     >
-      {/* Name input */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        viewport={{ once: true }}
-      >
-        <label className="block text-sm font-medium text-zinc-300 mb-2">Full Name</label>
-        <motion.input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="John Doe"
-          whileFocus={{ scale: 1.02 }}
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
-        />
-      </motion.div>
+      <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200">Premium Brief</p>
+          <h3 className="mt-2 text-2xl font-semibold text-white">Tell us about your next move.</h3>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-2 text-xs font-medium text-emerald-200">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+          Fast response
+        </div>
+      </div>
 
-      {/* Email input */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        <label className="block text-sm font-medium text-zinc-300 mb-2">Email Address</label>
-        <motion.input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="john@example.com"
-          whileFocus={{ scale: 1.02 }}
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
-        />
-      </motion.div>
-
-      {/* Budget and Service dropdowns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* Budget dropdown */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
           viewport={{ once: true }}
+          className="relative"
         >
-          <label className="block text-sm font-medium text-zinc-300 mb-2">Project Budget</label>
-          <motion.select
-            name="budget"
-            value={formData.budget}
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
-            whileFocus={{ scale: 1.02 }}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl appearance-none cursor-pointer"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322d3ee' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 12px center',
-              paddingRight: '36px',
-            }}
-          >
-            <option value="" disabled className="bg-zinc-900 text-white">
-              Select budget
-            </option>
-            {budgetOptions.map((option) => (
-              <option key={option.value} value={option.value} className="bg-zinc-900 text-white">
-                {option.label}
-              </option>
-            ))}
-          </motion.select>
+            placeholder=" "
+            autoComplete="name"
+            className={focusStyles}
+          />
+          <label className={labelStyles}>Full name</label>
         </motion.div>
 
-        {/* Service type dropdown */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           viewport={{ once: true }}
+          className="relative"
         >
-          <label className="block text-sm font-medium text-zinc-300 mb-2">Service Type</label>
-          <motion.select
-            name="service"
-            value={formData.service}
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
-            whileFocus={{ scale: 1.02 }}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl appearance-none cursor-pointer"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322d3ee' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 12px center',
-              paddingRight: '36px',
-            }}
-          >
-            <option value="" disabled className="bg-zinc-900 text-white">
-              Select service
-            </option>
-            {serviceOptions.map((option) => (
-              <option key={option.value} value={option.value} className="bg-zinc-900 text-white">
-                {option.label}
-              </option>
-            ))}
-          </motion.select>
+            placeholder=" "
+            autoComplete="email"
+            className={focusStyles}
+          />
+          <label className={labelStyles}>Email address</label>
         </motion.div>
       </div>
 
-      {/* Message textarea */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <select
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
+            className="peer w-full appearance-none rounded-2xl border border-white/10 bg-zinc-950/55 px-4 pb-3 pt-6 text-white outline-none transition-all duration-300 backdrop-blur-xl focus:border-cyan-400/50 focus:bg-zinc-950/75 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.15),0_16px_40px_rgba(0,0,0,0.22)]"
+          >
+            <option value="" className="bg-zinc-950 text-white"> </option>
+            {budgetOptions.map((option) => (
+              <option key={option.value} value={option.value} className="bg-zinc-950 text-white">
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <label className={getSelectLabelStyles(formData.budget)}>Project budget</label>
+          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-cyan-300/80">⌄</span>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <select
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            className="peer w-full appearance-none rounded-2xl border border-white/10 bg-zinc-950/55 px-4 pb-3 pt-6 text-white outline-none transition-all duration-300 backdrop-blur-xl focus:border-cyan-400/50 focus:bg-zinc-950/75 focus:shadow-[0_0_0_1px_rgba(34,211,238,0.15),0_16px_40px_rgba(0,0,0,0.22)]"
+          >
+            <option value="" className="bg-zinc-950 text-white"> </option>
+            {serviceOptions.map((option) => (
+              <option key={option.value} value={option.value} className="bg-zinc-950 text-white">
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <label className={getSelectLabelStyles(formData.service)}>Service type</label>
+          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-cyan-300/80">⌄</span>
+        </motion.div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
+        transition={{ duration: 0.4, delay: 0.25 }}
         viewport={{ once: true }}
+        className="relative"
       >
-        <label className="block text-sm font-medium text-zinc-300 mb-2">Message</label>
-        <motion.textarea
+        <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell us about your project..."
-          rows={5}
-          whileFocus={{ scale: 1.02 }}
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl resize-none"
+          placeholder=" "
+          rows={6}
+          className={`${focusStyles} min-h-40 resize-none pt-6`}
         />
+        <label className={labelStyles}>Project details</label>
       </motion.div>
 
-      {/* Submit button */}
       <motion.button
         type="submit"
         disabled={isSubmitting || submitStatus === 'success'}
-        whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
-        whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+        whileHover={shouldReduceMotion ? undefined : { y: -1, scale: 1.01 }}
+        whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.6 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
         viewport={{ once: true }}
-        className="w-full px-6 py-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-500 text-white font-semibold hover:shadow-[0_0_24px_rgba(34,211,238,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+        className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl border border-cyan-300/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.96),rgba(59,130,246,0.95),rgba(15,23,42,0.96))] px-6 py-4 text-base font-semibold text-white shadow-[0_18px_50px_rgba(37,99,235,0.28)] transition-all duration-300 hover:shadow-[0_24px_70px_rgba(37,99,235,0.42)] disabled:cursor-not-allowed disabled:opacity-60"
       >
+        <span className="absolute inset-0 bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.18),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         {isSubmitting ? (
-          <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }}>
-            Sending...
+          <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.2, repeat: Infinity }} className="relative">
+            Sending message...
           </motion.span>
         ) : submitStatus === 'success' ? (
-          'Message Sent! 🎉'
+          <span className="relative">Request sent</span>
         ) : (
-          'Send Message'
+          <span className="relative">Send inquiry</span>
         )}
       </motion.button>
 
-      {/* Status messages */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: submitStatus !== 'idle' ? 1 : 0 }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: submitStatus !== 'idle' ? 1 : 0, y: submitStatus !== 'idle' ? 0 : 8 }}
         transition={{ duration: 0.3 }}
-        className={`p-4 rounded-lg text-center text-sm font-medium ${
+        aria-live="polite"
+        className={`rounded-2xl border p-4 text-sm font-medium ${
           submitStatus === 'success'
-            ? 'bg-green-500/10 text-green-300 border border-green-500/30'
+            ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
             : submitStatus === 'error'
-              ? 'bg-red-500/10 text-red-300 border border-red-500/30'
+              ? 'border-rose-500/30 bg-rose-500/10 text-rose-200'
               : 'hidden'
         }`}
       >
-        {submitStatus === 'success' && "We've received your message! We'll get back to you soon."}
-        {submitStatus === 'error' && 'Please fill in all required fields.'}
+        {submitStatus === 'success' && "We've received your message and will reply soon."}
+        {submitStatus === 'error' && 'Please complete the required fields to continue.'}
       </motion.div>
+
+      <p className="text-center text-xs leading-6 text-zinc-500">
+        By submitting, you agree to be contacted by CloudFlow about your project. We respect your inbox and never send spam.
+      </p>
     </motion.form>
   );
 }
@@ -2271,7 +2407,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-zinc-950 border-t border-white/5">
+    <footer className="cloudflow-footer relative w-full overflow-hidden border-t border-white/10 bg-zinc-950">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -2292,17 +2428,19 @@ function Footer() {
         />
       </div>
 
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.05)_0%,transparent_45%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.06)_0%,transparent_40%)] pointer-events-none" />
+
       {/* Main footer content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 mb-16"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr_0.9fr_0.9fr_1.1fr] lg:gap-8 mb-14"
         >
           {/* Brand Section */}
-          <motion.div variants={itemVariants} className="lg:col-span-1">
+          <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
                 CloudFlow
@@ -2311,10 +2449,17 @@ function Footer() {
                 Building premium digital solutions for ambitious companies. Innovation, quality, and excellence in every project.
               </p>
             </div>
+            <div className="flex flex-wrap gap-2">
+              {['Strategy', 'Design', 'Build'].map((item) => (
+                <span key={item} className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-300">
+                  {item}
+                </span>
+              ))}
+            </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
             <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
@@ -2335,7 +2480,7 @@ function Footer() {
           </motion.div>
 
           {/* Services */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
             <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
@@ -2356,7 +2501,7 @@ function Footer() {
           </motion.div>
 
           {/* Resources */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
             <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Resources</h4>
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
@@ -2377,7 +2522,7 @@ function Footer() {
           </motion.div>
 
           {/* Newsletter */}
-          <motion.div variants={itemVariants} className="lg:col-span-1">
+          <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))] p-6 backdrop-blur-xl lg:col-span-1">
             <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Newsletter</h4>
             <p className="text-sm text-zinc-400 mb-4">Stay updated with the latest from CloudFlow.</p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-3">
@@ -2388,14 +2533,14 @@ function Footer() {
                   onChange={(e: any) => setEmailInput(e.target.value)}
                   placeholder="Enter email"
                   whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
+                  className="w-full px-4 py-3 rounded-2xl bg-zinc-950/50 border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl"
                 />
               </div>
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-4 py-2 rounded-lg bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:shadow-[0_0_16px_rgba(34,211,238,0.4)] transition-all duration-300"
+                className="w-full px-4 py-3 rounded-2xl bg-linear-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold hover:shadow-[0_0_16px_rgba(34,211,238,0.4)] transition-all duration-300"
               >
                 Subscribe
               </motion.button>
@@ -2507,7 +2652,7 @@ function Loader() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: easeOut }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
+      className="cloudflow-loader fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
