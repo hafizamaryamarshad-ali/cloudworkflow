@@ -18,6 +18,40 @@
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
   --accent: #22d3ee;
   --accent-strong: #38bdf8;
+  --projects-background:
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.98), rgba(15, 23, 42, 0.94));
+  --projects-grid: radial-gradient(circle at center, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  --projects-overlay: linear-gradient(to bottom, rgba(2, 6, 23, 0.06), rgba(2, 6, 23, 0.72) 18%, rgba(2, 6, 23, 0.98));
+  --projects-orb-cyan: rgba(34, 211, 238, 0.1);
+  --projects-orb-blue: rgba(59, 130, 246, 0.1);
+  --projects-orb-fuchsia: rgba(217, 70, 239, 0.1);
+  --projects-badge-bg: rgba(255, 255, 255, 0.05);
+  --projects-badge-border: rgba(34, 211, 238, 0.2);
+  --projects-badge-text: #c4f1ff;
+  --projects-surface: rgba(15, 23, 42, 0.88);
+  --projects-surface-soft: rgba(255, 255, 255, 0.06);
+  --projects-surface-strong: rgba(15, 23, 42, 0.94);
+  --projects-border: rgba(255, 255, 255, 0.1);
+  --projects-border-strong: rgba(34, 211, 238, 0.24);
+  --projects-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
+  --projects-shadow-hover: 0 24px 90px rgba(34, 211, 238, 0.16);
+  --projects-text: #f8fafc;
+  --projects-muted: #cbd5e1;
+  --projects-subtle: #94a3b8;
+  --projects-accent: #7dd3fc;
+  --projects-tag-bg: rgba(255, 255, 255, 0.06);
+  --projects-tag-border: rgba(125, 211, 252, 0.18);
+  --projects-tag-text: rgba(207, 250, 254, 0.92);
+  --projects-filter-active-bg: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(59, 130, 246, 0.16), rgba(15, 23, 42, 0.7));
+  --projects-filter-inactive-bg: rgba(255, 255, 255, 0.05);
+  --projects-filter-inactive-hover-bg: rgba(255, 255, 255, 0.08);
+  --projects-filter-count-bg: rgba(255, 255, 255, 0.14);
+  --projects-button-bg: linear-gradient(135deg, rgba(34, 211, 238, 0.95), rgba(59, 130, 246, 0.92), rgba(15, 23, 42, 0.95));
+  --projects-button-border: rgba(34, 211, 238, 0.2);
+  --projects-button-shadow: 0 12px 35px rgba(8, 145, 178, 0.18);
+  --projects-button-shadow-hover: 0 18px 45px rgba(8, 145, 178, 0.26);
 }
 
 :root[data-theme='light'] {
@@ -31,6 +65,40 @@
   --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
   --accent: #0891b2;
   --accent-strong: #2563eb;
+  --projects-background:
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(239, 246, 255, 0.98));
+  --projects-grid: radial-gradient(circle at center, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  --projects-overlay: linear-gradient(to bottom, rgba(248, 251, 255, 0.1), rgba(248, 251, 255, 0.7) 18%, rgba(248, 251, 255, 0.98));
+  --projects-orb-cyan: rgba(14, 165, 233, 0.12);
+  --projects-orb-blue: rgba(37, 99, 235, 0.1);
+  --projects-orb-fuchsia: rgba(168, 85, 247, 0.08);
+  --projects-badge-bg: rgba(255, 255, 255, 0.82);
+  --projects-badge-border: rgba(125, 211, 252, 0.28);
+  --projects-badge-text: #0369a1;
+  --projects-surface: rgba(255, 255, 255, 0.88);
+  --projects-surface-soft: rgba(255, 255, 255, 0.72);
+  --projects-surface-strong: rgba(255, 255, 255, 0.96);
+  --projects-border: rgba(15, 23, 42, 0.08);
+  --projects-border-strong: rgba(37, 99, 235, 0.2);
+  --projects-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --projects-shadow-hover: 0 24px 60px rgba(37, 99, 235, 0.12);
+  --projects-text: #0f172a;
+  --projects-muted: #475569;
+  --projects-subtle: #64748b;
+  --projects-accent: #0369a1;
+  --projects-tag-bg: rgba(255, 255, 255, 0.9);
+  --projects-tag-border: rgba(37, 99, 235, 0.14);
+  --projects-tag-text: #0f172a;
+  --projects-filter-active-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.92));
+  --projects-filter-inactive-bg: rgba(255, 255, 255, 0.86);
+  --projects-filter-inactive-hover-bg: rgba(255, 255, 255, 0.96);
+  --projects-filter-count-bg: rgba(15, 23, 42, 0.06);
+  --projects-button-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.96), rgba(37, 99, 235, 0.94), rgba(59, 130, 246, 0.95));
+  --projects-button-border: rgba(37, 99, 235, 0.22);
+  --projects-button-shadow: 0 16px 40px rgba(37, 99, 235, 0.22);
+  --projects-button-shadow-hover: 0 22px 54px rgba(37, 99, 235, 0.28);
 }
 
 :root[data-theme='dark'] {
@@ -257,6 +325,155 @@ body {
 
 :root[data-theme='light'] body .EaseWorkflow-section {
   position: relative;
+}
+
+.EaseWorkflow-section--projects {
+  background: var(--projects-background) !important;
+  color: var(--projects-text);
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-grid {
+  background-image: var(--projects-grid) !important;
+  opacity: 0.18 !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-overlay {
+  background: var(--projects-overlay) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-orb--cyan {
+  background-color: var(--projects-orb-cyan) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-orb--blue {
+  background-color: var(--projects-orb-blue) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-orb--fuchsia {
+  background-color: var(--projects-orb-fuchsia) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-badge {
+  border-color: var(--projects-badge-border) !important;
+  background: var(--projects-badge-bg) !important;
+  color: var(--projects-badge-text) !important;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-heading {
+  color: var(--projects-text) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-copy {
+  color: var(--projects-muted) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-stat {
+  border-color: var(--projects-border) !important;
+  background: var(--projects-surface-soft) !important;
+  box-shadow: var(--projects-shadow) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-stat-label {
+  color: var(--projects-subtle) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-filter {
+  border-color: var(--projects-border) !important;
+  background: var(--projects-filter-inactive-bg) !important;
+  color: var(--projects-muted) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-filter:hover {
+  border-color: var(--projects-border-strong) !important;
+  background: var(--projects-filter-inactive-hover-bg) !important;
+  color: var(--projects-text) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-filter--active {
+  border-color: var(--projects-border-strong) !important;
+  background: var(--projects-filter-active-bg) !important;
+  color: var(--projects-text) !important;
+  box-shadow: 0 16px 50px rgba(34, 211, 238, 0.18) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-filter-count {
+  background: var(--projects-filter-count-bg) !important;
+  color: var(--projects-muted) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-filter--active .EaseWorkflow-projects-filter-count {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: var(--projects-text) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-card {
+  border-color: var(--projects-border) !important;
+  background: var(--projects-surface) !important;
+  box-shadow: var(--projects-shadow) !important;
+}
+
+.EaseWorkflow-section--projects .group:hover .EaseWorkflow-projects-card {
+  border-color: var(--projects-border-strong) !important;
+  box-shadow: var(--projects-shadow-hover) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-card-glow {
+  opacity: 0.24 !important;
+}
+
+.EaseWorkflow-section--projects .group:hover .EaseWorkflow-projects-card-glow {
+  opacity: 0.8 !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-media-overlay {
+  background: linear-gradient(to top, var(--projects-surface-strong), rgba(15, 23, 42, 0.12) 48%, transparent) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-icon-shell {
+  border-color: var(--projects-border) !important;
+  background: var(--projects-surface-soft) !important;
+  color: var(--projects-text) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-category {
+  border-color: var(--projects-border) !important;
+  background: var(--projects-surface-strong) !important;
+  color: var(--projects-text) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-title {
+  color: var(--projects-text) !important;
+}
+
+.EaseWorkflow-section--projects .group:hover .EaseWorkflow-projects-title {
+  color: var(--projects-accent) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-highlight {
+  color: var(--projects-accent) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-description {
+  color: var(--projects-muted) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-tag {
+  border-color: var(--projects-tag-border) !important;
+  background: var(--projects-tag-bg) !important;
+  color: var(--projects-tag-text) !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-button {
+  border-color: var(--projects-button-border) !important;
+  background: var(--projects-button-bg) !important;
+  box-shadow: var(--projects-button-shadow) !important;
+  color: #ffffff !important;
+}
+
+.EaseWorkflow-section--projects .EaseWorkflow-projects-button:hover {
+  box-shadow: var(--projects-button-shadow-hover) !important;
 }
 
 :root[data-theme='light'] body .EaseWorkflow-section [class*='bg-zinc-950'],

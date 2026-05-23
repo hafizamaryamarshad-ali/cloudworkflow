@@ -1031,7 +1031,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
   };
 
   return (
-    <section id="projects" className="EaseWorkflow-section EaseWorkflow-section--projects relative w-full overflow-hidden bg-[#050816] py-20 sm:py-32 scroll-mt-28 sm:scroll-mt-32">
+    <section id="projects" className="EaseWorkflow-section EaseWorkflow-section--projects relative w-full overflow-hidden py-20 sm:py-32 scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -1039,7 +1039,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           scale: [1, 1.08, 1],
         }}
         transition={{ duration: reduceMotion ? 0 : 9, repeat: Infinity, ease: easeInOut }}
-        className="absolute top-1/4 -right-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
+        className="EaseWorkflow-projects-orb EaseWorkflow-projects-orb--cyan absolute top-1/4 -right-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{
@@ -1047,17 +1047,17 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           scale: [1, 1.12, 1],
         }}
         transition={{ duration: reduceMotion ? 0 : 11, repeat: Infinity, delay: 2, ease: easeInOut }}
-        className="absolute bottom-1/4 -left-40 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"
+        className="EaseWorkflow-projects-orb EaseWorkflow-projects-orb--blue absolute bottom-1/4 -left-40 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{ opacity: [0.08, 0.18, 0.08], y: [0, -12, 0] }}
         transition={{ duration: reduceMotion ? 0 : 10, repeat: Infinity, ease: easeInOut }}
-        className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
+        className="EaseWorkflow-projects-orb EaseWorkflow-projects-orb--fuchsia absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
       />
 
       {/* Grid background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.06)_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none opacity-20" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,6,23,0.1),rgba(2,6,23,0.72)_18%,rgba(2,6,23,0.98))] pointer-events-none" />
+      <div className="EaseWorkflow-projects-grid absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.06)_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none opacity-20" />
+      <div className="EaseWorkflow-projects-overlay absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,6,23,0.1),rgba(2,6,23,0.72)_18%,rgba(2,6,23,0.98))] pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1072,7 +1072,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           {/* Section label */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-white/5 px-4 py-2 mb-8 sm:mb-10 backdrop-blur-xl"
+            className="EaseWorkflow-projects-badge inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-white/5 px-4 py-2 mb-8 sm:mb-10 backdrop-blur-xl"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 animate-pulse opacity-75" />
@@ -1087,7 +1087,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
             variants={itemVariants}
             className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
-            <h2 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h2 className="EaseWorkflow-projects-heading text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
               All Projects
               <span className="mt-3 block bg-linear-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
                 Premium AI Automation Portfolio
@@ -1098,7 +1098,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto max-w-3xl text-lg leading-relaxed text-zinc-300 sm:text-xl"
+            className="EaseWorkflow-projects-copy mx-auto max-w-3xl text-lg leading-relaxed text-zinc-300 sm:text-xl"
           >
             A high-trust portfolio of AI, automation, CRM, OCR, scraping, and healthcare systems designed for enterprise impact.
           </motion.p>
@@ -1117,12 +1117,12 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
             <motion.div
               key={stat.label}
               variants={statVariants}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 text-left shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-400/25"
+              className="EaseWorkflow-projects-stat relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 text-left shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-400/25"
             >
               <div className="absolute inset-0 bg-linear-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10 opacity-80" />
               <div className="relative">
                 <AnimatedCounter end={stat.value} suffix={stat.suffix} active={statsVisible} reduceMotion={reduceMotion} />
-                <p className="mt-2 text-sm font-medium text-zinc-400">{stat.label}</p>
+                <p className="EaseWorkflow-projects-stat-label mt-2 text-sm font-medium text-zinc-400">{stat.label}</p>
               </div>
             </motion.div>
           ))}
@@ -1149,14 +1149,14 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
                 whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className={[
-                  'inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300',
+                  'inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 EaseWorkflow-projects-filter',
                   isActive
-                    ? 'border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.7))] text-white shadow-[0_16px_50px_rgba(34,211,238,0.18)]'
+                    ? 'EaseWorkflow-projects-filter--active border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.7))] text-white shadow-[0_16px_50px_rgba(34,211,238,0.18)]'
                     : 'border-white/10 bg-white/5 text-zinc-300 hover:border-cyan-300/20 hover:bg-white/8 hover:text-white',
                 ].join(' ')}
               >
                 <span>{filter}</span>
-                <span className={['rounded-full px-2 py-0.5 text-xs font-semibold', isActive ? 'bg-white/14 text-white' : 'bg-white/8 text-zinc-400'].join(' ')}>
+                <span className={['EaseWorkflow-projects-filter-count rounded-full px-2 py-0.5 text-xs font-semibold', isActive ? 'bg-white/14 text-white' : 'bg-white/8 text-zinc-400'].join(' ')}>
                   {filterCount}
                 </span>
               </motion.button>
@@ -1242,11 +1242,11 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           scale: shouldReduceMotion ? 1 : 1.06,
         }}
         transition={{ duration: 0.4 }}
-        className={`absolute inset-0 rounded-[1.75rem] bg-linear-to-br ${project.accent} opacity-30 blur-2xl -z-10`}
+        className={`EaseWorkflow-projects-card-glow absolute inset-0 rounded-[1.75rem] bg-linear-to-br ${project.accent} opacity-30 blur-2xl -z-10`}
       />
 
       {/* Card container */}
-      <div className="relative h-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.92),rgba(15,23,42,0.84))] shadow-[0_20px_70px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_24px_90px_rgba(34,211,238,0.16)]">
+      <div className="EaseWorkflow-projects-card relative h-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.92),rgba(15,23,42,0.84))] shadow-[0_20px_70px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_24px_90px_rgba(34,211,238,0.16)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.10),transparent_32%)] opacity-80" />
 
         {/* Image preview area */}
@@ -1261,7 +1261,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
             animate={{ opacity: 0.4 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.4 : 0.6 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent"
+            className="EaseWorkflow-projects-media-overlay absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent"
           />
 
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_40%,rgba(255,255,255,0.03))]" />
@@ -1269,12 +1269,12 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
 
           {/* Icon */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-white/15 bg-white/10 text-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
+            <div className="EaseWorkflow-projects-icon-shell flex h-24 w-24 items-center justify-center rounded-3xl border border-white/15 bg-white/10 text-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
               <project.icon className="h-10 w-10 sm:h-11 sm:w-11" strokeWidth={1.75} />
             </div>
           </div>
 
-          <div className="absolute left-4 top-4 inline-flex items-center rounded-full border border-white/15 bg-slate-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md">
+          <div className="EaseWorkflow-projects-category absolute left-4 top-4 inline-flex items-center rounded-full border border-white/15 bg-slate-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md">
             {project.category}
           </div>
         </motion.div>
@@ -1290,15 +1290,11 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           />
 
           {/* Title */}
-          <motion.h3
-            animate={{ color: 'rgb(255, 255, 255)' }}
-            whileHover={{ color: shouldReduceMotion ? 'rgb(255, 255, 255)' : 'rgb(165, 230, 255)' }}
-            className="mb-3 text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-[1.35rem]"
-          >
+          <motion.h3 className="EaseWorkflow-projects-title mb-3 text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-[1.35rem]">
             {project.title}
           </motion.h3>
 
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-cyan-200/80">
+          <p className="EaseWorkflow-projects-highlight mb-4 text-sm font-medium uppercase tracking-[0.18em] text-cyan-200/80">
             {project.highlight}
           </p>
 
@@ -1306,7 +1302,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           <motion.p
             animate={{ opacity: 0.65 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.65 : 0.85 }}
-            className="mb-5 text-sm leading-relaxed text-zinc-300 transition-opacity duration-300 sm:text-[0.98rem]"
+            className="EaseWorkflow-projects-description mb-5 text-sm leading-relaxed text-zinc-300 transition-opacity duration-300 sm:text-[0.98rem]"
           >
             {project.description}
           </motion.p>
@@ -1319,7 +1315,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
                 animate={{ scale: 1, opacity: 0.7 }}
                 whileHover={{ scale: shouldReduceMotion ? 1 : 1.05, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="inline-flex items-center rounded-full border border-cyan-300/15 bg-white/6 px-3 py-1 text-xs font-medium text-cyan-100/90 backdrop-blur-sm"
+                className="EaseWorkflow-projects-tag inline-flex items-center rounded-full border border-cyan-300/15 bg-white/6 px-3 py-1 text-xs font-medium text-cyan-100/90 backdrop-blur-sm"
               >
                 {tag}
               </motion.span>
@@ -1334,7 +1330,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
             <button
               type="button"
               onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
-              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.75))] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(8,145,178,0.18)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_18px_45px_rgba(8,145,178,0.26)]"
+              className="EaseWorkflow-projects-button inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.75))] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(8,145,178,0.18)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_18px_45px_rgba(8,145,178,0.26)]"
               aria-label={`View details for ${project.title}`}
             >
               View Details
