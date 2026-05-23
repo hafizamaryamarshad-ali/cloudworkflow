@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from 'next/script';
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { getThemeBootstrapScript } from "@/lib/theme";
+import ThemeBootstrap from "@/components/ThemeBootstrap";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,13 +30,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <Script
-          id="theme-bootstrap"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: getThemeBootstrapScript() }}
-        />
-      </head>
+      <ThemeBootstrap />
       <body className="min-h-full flex flex-col bg-zinc-950 transition-colors duration-300">
         <Navbar />
         {children}
