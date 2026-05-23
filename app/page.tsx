@@ -20,7 +20,6 @@ import {
   ScanSearch,
   Radar,
   SearchCheck,
-  BrainCircuit,
   ShieldCheck,
   ArrowRight,
   type LucideIcon,
@@ -891,55 +890,22 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
         'Seamlessly automated CRM-to-EHR data entry with secure, HIPAA-compliant healthcare workflows, reducing manual administrative workload and improving operational efficiency.',
       tags: ['HIPAA', 'EHR Sync', 'Secure Automation'],
       icon: ShieldCheck,
-      accent: 'from-cyan-400 via-blue-500 to-sky-500',
+      accent: 'from-cyan-400 via-sky-500 to-blue-600',
       highlight: 'Streamlined clinical operations with protected data handling.',
     },
     {
       id: 2,
-      title: 'Custom Healthcare CRM',
-      category: 'Healthcare CRM',
-      description:
-        'Built a tailored healthcare CRM featuring automated reminders, patient follow-ups, communication workflows, and centralized patient management.',
-      tags: ['Patient Ops', 'Workflow CRM', 'Follow-up Automation'],
-      icon: BriefcaseMedical,
-      accent: 'from-emerald-400 via-cyan-500 to-blue-500',
-      highlight: 'Designed to keep care teams organized and responsive.',
-    },
-    {
-      id: 3,
-      title: 'Multi-Platform Job Apply Automation',
-      category: 'Workflow Automation',
-      description:
-        'Developed automation systems capable of applying to jobs across 5+ major job platforms, multiple ATS systems, and company career portals.',
-      tags: ['ATS Coverage', 'Platform Agnostic', 'Automation'],
-      icon: Workflow,
-      accent: 'from-blue-400 via-cyan-500 to-indigo-500',
-      highlight: 'Built for high-volume, multi-channel application execution.',
-    },
-    {
-      id: 4,
       title: 'Autonomous AI Job Agent',
       category: 'AI Agent',
       description:
         'Created an AI-powered autonomous job search assistant that generates optimized resumes, personalized cover letters, and intelligently applies for relevant positions.',
       tags: ['AI Agent', 'Resume Optimization', 'Personalized Outreach'],
       icon: Bot,
-      accent: 'from-fuchsia-400 via-violet-500 to-cyan-500',
+      accent: 'from-fuchsia-400 via-violet-500 to-indigo-500',
       highlight: 'Acts as a self-directed job search and application engine.',
     },
     {
-      id: 5,
-      title: 'AI-Powered Smart CRM',
-      category: 'AI CRM System',
-      description:
-        'Designed an intelligent CRM platform automating lead management, outreach campaigns, follow-ups, pipeline tracking, and AI-generated client responses.',
-      tags: ['Lead Ops', 'Pipeline Intelligence', 'Client Messaging'],
-      icon: DatabaseZap,
-      accent: 'from-cyan-400 via-emerald-500 to-teal-500',
-      highlight: 'Blends sales operations with AI-driven decision support.',
-    },
-    {
-      id: 6,
+      id: 3,
       title: 'Enterprise OCR Automation',
       category: 'OCR & Document AI',
       description:
@@ -950,37 +916,59 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
       highlight: 'Engineered for document-heavy enterprise operations.',
     },
     {
-      id: 7,
-      title: 'AI Meeting & Interview Assistant',
-      category: 'AI Assistant',
+      id: 4,
+      title: 'Custom Healthcare CRM',
+      category: 'Healthcare CRM',
       description:
-        'Advanced real-time AI assistant for meetings and interviews with live support, smart suggestions, contextual insights, and productivity enhancement features.',
-      tags: ['Real-Time Support', 'Context Awareness', 'Productivity'],
-      icon: BrainCircuit,
-      accent: 'from-indigo-400 via-sky-500 to-cyan-500',
-      highlight: 'Delivers live guidance during high-stakes conversations.',
+        'Built a tailored healthcare CRM featuring automated reminders, patient follow-ups, communication workflows, and centralized patient management.',
+      tags: ['Patient Ops', 'Workflow CRM', 'Follow-up Automation'],
+      icon: BriefcaseMedical,
+      accent: 'from-emerald-400 via-teal-500 to-cyan-500',
+      highlight: 'Designed to keep care teams organized and responsive.',
     },
     {
-      id: 8,
+      id: 5,
       title: 'Data Scraping & Crawling Systems',
       category: 'Data Engineering',
       description:
         'Developed 30+ high-performance web scraping and crawling systems for large-scale data extraction, monitoring, and processing pipelines.',
       tags: ['Data Pipelines', 'Monitoring', 'High Throughput'],
       icon: Radar,
-      accent: 'from-slate-300 via-cyan-400 to-blue-500',
+      accent: 'from-slate-300 via-cyan-400 to-sky-500',
       highlight: 'Supports dependable extraction across large data estates.',
     },
     {
-      id: 9,
+      id: 6,
+      title: 'AI-Powered Smart CRM',
+      category: 'AI CRM System',
+      description:
+        'Designed an intelligent CRM platform automating lead management, outreach campaigns, follow-ups, pipeline tracking, and AI-generated client responses.',
+      tags: ['Lead Ops', 'Pipeline Intelligence', 'Client Messaging'],
+      icon: DatabaseZap,
+      accent: 'from-sky-400 via-indigo-500 to-violet-500',
+      highlight: 'Blends sales operations with AI-driven decision support.',
+    },
+    {
+      id: 8,
       title: 'Autonomous Lead Generation Agent',
       category: 'Lead Generation AI',
       description:
         'Built an AI-powered lead generation system that discovers high-value prospects, gathers contact data, and generates personalized outreach insights automatically.',
       tags: ['Prospect Discovery', 'Contact Enrichment', 'AI Outreach'],
       icon: SearchCheck,
-      accent: 'from-emerald-400 via-cyan-500 to-blue-500',
+      accent: 'from-emerald-400 via-cyan-500 to-teal-500',
       highlight: 'Creates a repeatable pipeline for targeted business growth.',
+    },
+    {
+      id: 9,
+      title: 'Multi-Platform Job Apply Automation',
+      category: 'Workflow Automation',
+      description:
+        'Developed automation systems capable of applying to jobs across 5+ major job platforms, multiple ATS systems, and company career portals.',
+      tags: ['ATS Coverage', 'Platform Agnostic', 'Automation'],
+      icon: Workflow,
+      accent: 'from-blue-400 via-cyan-500 to-indigo-500',
+      highlight: 'Built for high-volume, multi-channel application execution.',
     },
   ];
 
@@ -989,7 +977,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
     activeCategory === 'All Projects' ? projects : projects.filter((project) => project.category === activeCategory);
 
   const stats: ProjectStat[] = [
-    { value: 9, suffix: '', label: 'Flagship projects' },
+    { value: 8, suffix: '', label: 'Flagship projects' },
     { value: 5, suffix: '+', label: 'Core business sectors' },
     { value: 30, suffix: '+', label: 'Automation systems' },
     { value: 100, suffix: '%', label: 'Responsive delivery' },
@@ -1170,7 +1158,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 sm:gap-8"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 sm:gap-5 lg:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {visibleProjects.map((project) => (
@@ -1230,7 +1218,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
     <motion.div
       variants={itemVariants}
       layout
-      whileHover={shouldReduceMotion ? undefined : { y: -10, scale: 1.01 }}
+      whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.008 }}
       transition={{ duration: 0.35, type: 'spring', stiffness: 300, damping: 25 }}
       className="group relative h-full"
     >
@@ -1242,11 +1230,11 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           scale: shouldReduceMotion ? 1 : 1.06,
         }}
         transition={{ duration: 0.4 }}
-        className={`EaseWorkflow-projects-card-glow absolute inset-0 rounded-[1.75rem] bg-linear-to-br ${project.accent} opacity-30 blur-2xl -z-10`}
+        className={`EaseWorkflow-projects-card-glow absolute inset-0 rounded-3xl bg-linear-to-br ${project.accent} opacity-30 blur-2xl -z-10`}
       />
 
       {/* Card container */}
-      <div className="EaseWorkflow-projects-card relative h-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.92),rgba(15,23,42,0.84))] shadow-[0_20px_70px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_24px_90px_rgba(34,211,238,0.16)]">
+      <div className="EaseWorkflow-projects-card relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.92),rgba(15,23,42,0.84))] shadow-[0_18px_56px_rgba(0,0,0,0.34)] backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_22px_68px_rgba(34,211,238,0.14)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.10),transparent_32%)] opacity-80" />
 
         {/* Image preview area */}
@@ -1254,7 +1242,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           animate={{ scale: 1 }}
           whileHover={{ scale: shouldReduceMotion ? 1 : 1.03 }}
           transition={{ duration: 0.4 }}
-          className={`relative h-44 overflow-hidden bg-linear-to-br ${project.accent} sm:h-52`}
+          className={`relative h-32 overflow-hidden bg-linear-to-br ${project.accent} sm:h-36`}
         >
           {/* Animated gradient overlay */}
           <motion.div
@@ -1269,32 +1257,32 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
 
           {/* Icon */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="EaseWorkflow-projects-icon-shell flex h-24 w-24 items-center justify-center rounded-3xl border border-white/15 bg-white/10 text-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
-              <project.icon className="h-10 w-10 sm:h-11 sm:w-11" strokeWidth={1.75} />
+            <div className="EaseWorkflow-projects-icon-shell flex h-18 w-18 items-center justify-center rounded-[1.15rem] border border-white/15 bg-white/10 text-white shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
+              <project.icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.75} />
             </div>
           </div>
 
-          <div className="EaseWorkflow-projects-category absolute left-4 top-4 inline-flex items-center rounded-full border border-white/15 bg-slate-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md">
+          <div className="EaseWorkflow-projects-category absolute left-3 top-3 inline-flex items-center rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-md sm:left-4 sm:top-4 sm:px-3 sm:text-[11px]">
             {project.category}
           </div>
         </motion.div>
 
         {/* Content area */}
-        <div className="relative p-6 sm:p-8">
+        <div className="relative flex flex-1 flex-col p-4 sm:p-5">
           {/* Top accent line */}
           <motion.div
             animate={{ opacity: 0.35 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.3 : 1 }}
             transition={{ duration: 0.3 }}
-            className="absolute left-6 right-6 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/70 to-transparent"
+            className="absolute left-4 right-4 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/70 to-transparent sm:left-5 sm:right-5"
           />
 
           {/* Title */}
-          <motion.h3 className="EaseWorkflow-projects-title mb-3 text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-[1.35rem]">
+          <motion.h3 className="EaseWorkflow-projects-title mb-2 text-lg font-semibold tracking-tight transition-colors duration-300 sm:text-[1.05rem]">
             {project.title}
           </motion.h3>
 
-          <p className="EaseWorkflow-projects-highlight mb-4 text-sm font-medium uppercase tracking-[0.18em] text-cyan-200/80">
+          <p className="EaseWorkflow-projects-highlight mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-200/80 sm:text-[11px]">
             {project.highlight}
           </p>
 
@@ -1302,20 +1290,26 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           <motion.p
             animate={{ opacity: 0.65 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.65 : 0.85 }}
-            className="EaseWorkflow-projects-description mb-5 text-sm leading-relaxed text-zinc-300 transition-opacity duration-300 sm:text-[0.98rem]"
+            className="EaseWorkflow-projects-description text-sm leading-5.5 text-zinc-300 transition-opacity duration-300 sm:text-sm"
+            style={{
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
+              overflow: 'hidden',
+            }}
           >
             {project.description}
           </motion.p>
 
           {/* Project tags */}
-          <div className="mb-6 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {project.tags.map((tag: string, idx: number) => (
               <motion.span
                 key={idx}
                 animate={{ scale: 1, opacity: 0.7 }}
                 whileHover={{ scale: shouldReduceMotion ? 1 : 1.05, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="EaseWorkflow-projects-tag inline-flex items-center rounded-full border border-cyan-300/15 bg-white/6 px-3 py-1 text-xs font-medium text-cyan-100/90 backdrop-blur-sm"
+                className="EaseWorkflow-projects-tag inline-flex items-center rounded-full border border-cyan-300/15 bg-white/6 px-2.5 py-0.75 text-[10px] font-medium text-cyan-100/90 backdrop-blur-sm sm:px-3 sm:text-[11px]"
               >
                 {tag}
               </motion.span>
@@ -1324,13 +1318,14 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
 
           {/* View Details button */}
           <motion.div
+            className="mt-auto pt-3"
             whileHover={shouldReduceMotion ? undefined : { x: 4 }}
             transition={{ duration: 0.3 }}
           >
             <button
               type="button"
               onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
-              className="EaseWorkflow-projects-button inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.75))] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(8,145,178,0.18)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_18px_45px_rgba(8,145,178,0.26)]"
+              className="EaseWorkflow-projects-button inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.75))] px-3.5 py-1.75 text-[0.82rem] font-semibold text-white shadow-[0_12px_35px_rgba(8,145,178,0.18)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_18px_45px_rgba(8,145,178,0.26)]"
               aria-label={`View details for ${project.title}`}
             >
               View Details

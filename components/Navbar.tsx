@@ -41,19 +41,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof document === 'undefined') {
-      return DEFAULT_THEME;
-    }
-
-    const attributeTheme = document.documentElement.dataset.theme;
-
-    if (attributeTheme === 'dark' || attributeTheme === 'light') {
-      return attributeTheme;
-    }
-
-    return resolveStoredTheme(window.localStorage.getItem(THEME_STORAGE_KEY));
-  });
+  const [theme, setTheme] = useState<ThemeMode>(DEFAULT_THEME);
   const shouldReduceMotion = useReducedMotion();
 
   const scrollToSection = (sectionId: string) => {
@@ -69,6 +57,17 @@ export default function Navbar() {
     setTheme(nextTheme);
     applyTheme(nextTheme);
   };
+
+  useEffect(() => {
+    const attributeTheme = document.documentElement.dataset.theme;
+
+    if (attributeTheme === 'dark' || attributeTheme === 'light') {
+      setTheme(attributeTheme);
+      return;
+    }
+
+    setTheme(resolveStoredTheme(window.localStorage.getItem(THEME_STORAGE_KEY)));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

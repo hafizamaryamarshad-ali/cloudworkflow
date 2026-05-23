@@ -16,10 +16,6 @@ export function applyTheme(theme: ThemeMode) {
   root.dataset.theme = theme;
   root.style.colorScheme = theme;
 
-  if (document.body) {
-    document.body.dataset.theme = theme;
-  }
-
   window.localStorage.setItem(THEME_STORAGE_KEY, theme);
 }
 
@@ -33,9 +29,6 @@ export function getThemeBootstrapScript() {
         var root = document.documentElement;
         root.dataset.theme = theme;
         root.style.colorScheme = theme;
-        if (document.body) {
-          document.body.dataset.theme = theme;
-        }
       } catch (error) {
         var fallbackRoot = document.documentElement;
         fallbackRoot.dataset.theme = '${DEFAULT_THEME}';
