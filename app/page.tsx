@@ -112,29 +112,29 @@ export default function Home() {
   return (
     <>
     {showLoader && <Loader />}
-    <section id="home" data-cloudflow-hero className="cloudflow-hero relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center scroll-mt-28 sm:scroll-mt-32">
+    <section id="home" data-easeworkflow-hero className="easeworkflow-hero relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center scroll-mt-28 sm:scroll-mt-32">
       {/* Base gradient backdrop */}
-      <div className="cloudflow-hero-backdrop absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
+      <div className="EaseWorkflow-hero-backdrop absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
 
       {/* Large primary glow orb - floating */}
       <motion.div
         variants={driftVariants}
         animate="animate"
-        className="cloudflow-hero-glow cloudflow-hero-glow-primary absolute -top-40 -left-40 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"
+        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-primary absolute -top-40 -left-40 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"
       />
 
       {/* Secondary glow orb - drifting */}
       <motion.div
         variants={slowDriftVariants}
         animate="animate"
-        className="cloudflow-hero-glow cloudflow-hero-glow-secondary absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-blue-600/12 blur-3xl pointer-events-none"
+        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-secondary absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-blue-600/12 blur-3xl pointer-events-none"
       />
 
       {/* Tertiary accent orb - floating */}
       <motion.div
         variants={floatingVariants}
         animate="animate"
-        className="cloudflow-hero-glow cloudflow-hero-glow-accent absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
+        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-accent absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
       />
 
       {/* Accent light ray - top right */}
@@ -144,31 +144,31 @@ export default function Home() {
           scale: [1, 1.1, 1],
         }}
         transition={{ duration: shouldReduceMotion ? 0 : 6, repeat: Infinity, ease: easeInOut }}
-        className="cloudflow-hero-light-ray absolute -top-20 right-1/4 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"
+        className="EaseWorkflow-hero-light-ray absolute -top-20 right-1/4 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"
       />
 
       {/* Ambient glow - center */}
       <motion.div
         variants={pulseVariants}
         animate="animate"
-        className="cloudflow-hero-ambient absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-cyan-400/8 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        className="EaseWorkflow-hero-ambient absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-cyan-400/8 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"
       />
 
       {/* Grid background with gradient */}
-      <div className="cloudflow-hero-grid absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.04)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-50" />
+      <div className="EaseWorkflow-hero-grid absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.04)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-50" />
 
       {/* Radial fade overlay */}
-      <div className="cloudflow-hero-vignette absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] pointer-events-none" />
+      <div className="EaseWorkflow-hero-vignette absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] pointer-events-none" />
 
       {/* Subtle animated light streaks */}
       <motion.div
         animate={{ opacity: [0.05, 0.15, 0.05] }}
         transition={{ duration: shouldReduceMotion ? 0 : 7, repeat: Infinity, ease: easeInOut }}
-        className="cloudflow-hero-streaks absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(34,211,238,0.03)_50%,transparent_100%)] pointer-events-none"
+        className="EaseWorkflow-hero-streaks absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(34,211,238,0.03)_50%,transparent_100%)] pointer-events-none"
       />
 
       {/* Floating particles effect - top layer */}
-      <div className="cloudflow-hero-particles absolute inset-0 pointer-events-none">
+      <div className="EaseWorkflow-hero-particles absolute inset-0 pointer-events-none">
         {/* Particle 1 */}
         <motion.div
           animate={{
@@ -211,7 +211,7 @@ export default function Home() {
         {/* Badge */}
         <motion.div
           variants={itemVariants}
-          className="cloudflow-hero-badge inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8"
+          className="EaseWorkflow-hero-badge inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
@@ -223,7 +223,7 @@ export default function Home() {
         {/* Main headline */}
         <motion.h1
           variants={itemVariants}
-          className="cloudflow-hero-title text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6"
+          className="EaseWorkflow-hero-title text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6"
         >
           Build Smarter{' '}
           <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
@@ -235,7 +235,7 @@ export default function Home() {
         {/* Subheading */}
         <motion.p
           variants={itemVariants}
-          className="cloudflow-hero-copy text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="EaseWorkflow-hero-copy text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           We create automation systems, AI solutions, and premium web platforms that help businesses scale faster.
         </motion.p>
@@ -243,14 +243,14 @@ export default function Home() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="cloudflow-hero-actions flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
+          className="EaseWorkflow-hero-actions flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
         >
           {/* Primary CTA Button */}
           <motion.div
             whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="cloudflow-hero-primary-wrap w-full sm:w-auto"
+            className="EaseWorkflow-hero-primary-wrap w-full sm:w-auto"
           >
             <div className="relative group">
               {/* Glow background */}
@@ -259,7 +259,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
-                className="cloudflow-hero-primary-cta relative inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-r from-cyan-600/95 via-blue-600/95 to-cyan-700/95 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white shadow-[0_8px_32px_rgba(34,211,238,0.3)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.5)] transition-all duration-300 hover:border-cyan-400/50 backdrop-blur-sm"
+                className="EaseWorkflow-hero-primary-cta relative inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-r from-cyan-600/95 via-blue-600/95 to-cyan-700/95 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white shadow-[0_8px_32px_rgba(34,211,238,0.3)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.5)] transition-all duration-300 hover:border-cyan-400/50 backdrop-blur-sm"
               >
                 <span className="relative">Start Project</span>
               </button>
@@ -271,7 +271,7 @@ export default function Home() {
             whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
             transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="cloudflow-hero-secondary-wrap w-full sm:w-auto"
+            className="EaseWorkflow-hero-secondary-wrap w-full sm:w-auto"
           >
             <div className="relative group">
               {/* Subtle glow background */}
@@ -280,7 +280,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => scrollToSection('projects', shouldReduceMotion ? 'auto' : 'smooth')}
-                className="cloudflow-hero-secondary-cta relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white/95 backdrop-blur-md transition-all duration-300 hover:bg-white/12 hover:border-white/35 hover:text-white shadow-[0_8px_32px_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(34,211,238,0.15)]"
+                className="EaseWorkflow-hero-secondary-cta relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white/95 backdrop-blur-md transition-all duration-300 hover:bg-white/12 hover:border-white/35 hover:text-white shadow-[0_8px_32px_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(34,211,238,0.15)]"
               >
                 <span className="relative">View Work</span>
               </button>
@@ -291,7 +291,7 @@ export default function Home() {
         {/* Features brief */}
         <motion.div
           variants={itemVariants}
-          className="cloudflow-hero-metrics mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-white/10"
+          className="EaseWorkflow-hero-metrics mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-white/10"
         >
           <div className="text-center">
             <div className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
@@ -374,7 +374,7 @@ function StatsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | nu
   };
 
   return (
-    <section id="stats" className="cloudflow-section cloudflow-section--stats relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="stats" className="EaseWorkflow-section EaseWorkflow-section--stats relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -546,12 +546,12 @@ function AboutSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | nu
     },
     {
       title: 'Long-term support',
-      description: 'CloudFlow is built to grow with your team, from launch to ongoing optimization.',
+      description: 'EaseWorkflow is built to grow with your team, from launch to ongoing optimization.',
     },
   ];
 
   return (
-    <section id="about" className="cloudflow-section cloudflow-section--about relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="about" className="EaseWorkflow-section EaseWorkflow-section--about relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.05)_0%,transparent_55%)] pointer-events-none" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -567,7 +567,7 @@ function AboutSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | nu
                 <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
               </span>
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">About CloudFlow</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">About EaseWorkflow</span>
             </div>
 
             <h2 id="about-title" className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white scroll-mt-28 sm:scroll-mt-32">
@@ -575,7 +575,7 @@ function AboutSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | nu
             </h2>
 
             <p className="max-w-2xl text-lg sm:text-xl leading-relaxed text-zinc-300">
-              CloudFlow builds premium digital platforms, automation workflows, and AI-enabled experiences that help ambitious companies scale with clarity and confidence.
+              EaseWorkflow builds premium digital platforms, automation workflows, and AI-enabled experiences that help ambitious companies scale with clarity and confidence.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
@@ -678,7 +678,7 @@ function ServicesSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
   };
 
   return (
-    <section id="services" className="cloudflow-section cloudflow-section--services relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="services" className="EaseWorkflow-section EaseWorkflow-section--services relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -1031,7 +1031,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
   };
 
   return (
-    <section id="projects" className="cloudflow-section cloudflow-section--projects relative w-full overflow-hidden bg-[#050816] py-20 sm:py-32 scroll-mt-28 sm:scroll-mt-32">
+    <section id="projects" className="EaseWorkflow-section EaseWorkflow-section--projects relative w-full overflow-hidden bg-[#050816] py-20 sm:py-32 scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
@@ -1440,7 +1440,7 @@ function ProcessSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
   };
 
   return (
-    <section id="process" className="cloudflow-section cloudflow-section--process relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="process" className="EaseWorkflow-section EaseWorkflow-section--process relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       {/* Primary cyan orb - top left */}
       <motion.div
@@ -1787,7 +1787,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
       name: 'Sarah Chen',
       role: 'CEO',
       company: 'TechVenture Labs',
-      review: 'CloudFlow transformed our development process. The team was incredibly professional and delivered beyond expectations. Highly recommend for any ambitious startup.',
+      review: 'EaseWorkflow transformed our development process. The team was incredibly professional and delivered beyond expectations. Highly recommend for any ambitious startup.',
       rating: 5,
       avatar: '👩‍💼',
     },
@@ -1796,7 +1796,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
       name: 'Marcus Johnson',
       role: 'Product Lead',
       company: 'Digital Innovations',
-      review: 'Outstanding quality of work and communication throughout the project. CloudFlow understood our vision and executed it flawlessly. A true partner in growth.',
+      review: 'Outstanding quality of work and communication throughout the project. EaseWorkflow understood our vision and executed it flawlessly. A true partner in growth.',
       rating: 5,
       avatar: '👨‍💼',
     },
@@ -1805,7 +1805,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
       name: 'Elena Rodriguez',
       role: 'Founder',
       company: 'Future Solutions Inc',
-      review: 'Working with CloudFlow was a game-changer for our company. Their expertise and attention to detail resulted in a product we\'re incredibly proud of.',
+      review: 'Working with EaseWorkflow was a game-changer for our company. Their expertise and attention to detail resulted in a product we\'re incredibly proud of.',
       rating: 5,
       avatar: '👩‍💻',
     },
@@ -1814,7 +1814,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
       name: 'David Park',
       role: 'CTO',
       company: 'CloudNext Systems',
-      review: 'Exceptional technical expertise combined with genuine care for our success. CloudFlow consistently goes above and beyond. Worth every investment.',
+      review: 'Exceptional technical expertise combined with genuine care for our success. EaseWorkflow consistently goes above and beyond. Worth every investment.',
       rating: 5,
       avatar: '👨‍💻',
     },
@@ -1902,7 +1902,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
   };
 
   return (
-    <section id="testimonials" className="cloudflow-section cloudflow-section--testimonials relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="testimonials" className="EaseWorkflow-section EaseWorkflow-section--testimonials relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       {/* Primary glow orb - top right */}
       <motion.div
@@ -1954,7 +1954,7 @@ function TestimonialsSection({ shouldReduceMotion }: { shouldReduceMotion: boole
 
           {/* Subtitle */}
           <motion.p variants={itemVariants} className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-            See what our clients have to say about their experience working with CloudFlow and the impact we've made on their business.
+            See what our clients have to say about their experience working with EaseWorkflow and the impact we've made on their business.
           </motion.p>
         </motion.div>
 
@@ -2203,7 +2203,7 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
   };
 
   return (
-    <section id="contact" className="cloudflow-section cloudflow-section--contact relative w-full overflow-hidden bg-zinc-950 py-24 sm:py-36 scroll-mt-28 sm:scroll-mt-32">
+    <section id="contact" className="EaseWorkflow-section EaseWorkflow-section--contact relative w-full overflow-hidden bg-zinc-950 py-24 sm:py-36 scroll-mt-28 sm:scroll-mt-32">
       <motion.div
         animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.08, 1], x: [0, 24, 0], y: [0, -18, 0] }}
         transition={{ duration: shouldReduceMotion ? 0 : 12, repeat: Infinity, ease: easeInOut }}
@@ -2243,7 +2243,7 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
 
               <div className="space-y-5">
                 <motion.h2 id="contact-title" variants={itemVariants} className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                  Build something premium with CloudFlow.
+                  Build something premium with EaseWorkflow.
                 </motion.h2>
                 <motion.p variants={itemVariants} className="max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
                   Tell us what you are building. We will review your project, respond quickly, and recommend the best path from concept to launch.
@@ -2266,8 +2266,8 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
                   </div>
                   <div>
                     <p className="text-sm text-zinc-400">Email</p>
-                    <a href="mailto:hello@cloudflow.dev" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-cyan-300">
-                      hello@cloudflow.dev
+                    <a href="mailto:hello@EaseWorkflow.dev" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-cyan-300">
+                      hello@EaseWorkflow.dev
                     </a>
                   </div>
                 </div>
@@ -2574,7 +2574,7 @@ function ContactForm({ shouldReduceMotion }: { shouldReduceMotion: boolean | nul
       </motion.div>
 
       <p className="text-center text-xs leading-6 text-zinc-500">
-        By submitting, you agree to be contacted by CloudFlow about your project. We respect your inbox and never send spam.
+        By submitting, you agree to be contacted by EaseWorkflow about your project. We respect your inbox and never send spam.
       </p>
     </motion.form>
   );
@@ -2654,7 +2654,7 @@ function Footer() {
   };
 
   return (
-    <footer className="cloudflow-footer relative w-full overflow-hidden border-t border-white/10 bg-zinc-950">
+    <footer className="EaseWorkflow-footer relative w-full overflow-hidden border-t border-white/10 bg-zinc-950">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -2690,7 +2690,7 @@ function Footer() {
           <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
-                CloudFlow
+                EaseWorkflow
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
                 Building premium digital solutions for ambitious companies. Innovation, quality, and excellence in every project.
@@ -2771,7 +2771,7 @@ function Footer() {
           {/* Newsletter */}
           <motion.div variants={itemVariants} className="rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))] p-6 backdrop-blur-xl lg:col-span-1">
             <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">Newsletter</h4>
-            <p className="text-sm text-zinc-400 mb-4">Stay updated with the latest from CloudFlow.</p>
+            <p className="text-sm text-zinc-400 mb-4">Stay updated with the latest from EaseWorkflow.</p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-3">
               <div className="relative group">
                 <motion.input
@@ -2865,7 +2865,7 @@ function Footer() {
           {/* Copyright */}
           <motion.div variants={itemVariants} className="text-center sm:text-right">
             <p className="text-xs text-zinc-500">
-              © 2024 CloudFlow. All rights reserved.{' '}
+              © 2024 EaseWorkflow. All rights reserved.{' '}
               <motion.a
                 href="#"
                 whileHover={{ textDecoration: 'underline' }}
@@ -2899,7 +2899,7 @@ function Loader() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: easeOut }}
-      className="cloudflow-loader fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
+      className="EaseWorkflow-loader fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
@@ -2992,7 +2992,7 @@ function Loader() {
             transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
             className="text-2xl font-bold text-white text-center"
           >
-            CloudFlow
+            EaseWorkflow
           </motion.h2>
 
           {/* Animated dots */}

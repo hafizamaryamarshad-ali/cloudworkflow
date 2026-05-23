@@ -21,7 +21,7 @@ export function scrollToSection(sectionId: string, behavior: ScrollBehavior = 's
     return;
   }
 
-  const navbarElement = document.querySelector('[data-cloudflow-navbar]') as HTMLElement | null;
+  const navbarElement = document.querySelector('[data-easeworkflow-navbar]') as HTMLElement | null;
   const navbarOffset = navbarElement ? navbarElement.getBoundingClientRect().height : 0;
   const targetTop = window.scrollY + targetElement.getBoundingClientRect().top - navbarOffset;
 

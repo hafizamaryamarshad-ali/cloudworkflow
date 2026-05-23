@@ -1,6 +1,6 @@
 export type ThemeMode = 'dark' | 'light';
 
-export const THEME_STORAGE_KEY = 'cloudflow-theme';
+export const THEME_STORAGE_KEY = 'EaseWorkflow-theme';
 export const DEFAULT_THEME: ThemeMode = 'dark';
 
 export function resolveStoredTheme(value: string | null | undefined): ThemeMode {

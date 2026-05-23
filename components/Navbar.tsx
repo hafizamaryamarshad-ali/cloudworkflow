@@ -148,7 +148,7 @@ export default function Navbar() {
         opacity: 1,
       }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: 'easeOut' }}
-      data-cloudflow-navbar
+      data-easeworkflow-navbar
       className="sticky top-0 z-50 w-full"
     >
       <nav
@@ -160,7 +160,7 @@ export default function Navbar() {
           whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
           transition={{ duration: 0.2 }}
           className={[
-            'cloudflow-brand-shell relative flex items-center gap-3 rounded-full border px-4 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-colors duration-300',
+            'EaseWorkflow-brand-shell relative flex items-center gap-3 rounded-full border px-4 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-colors duration-300',
             isScrolled
               ? theme === 'dark'
                 ? 'border-white/12 bg-zinc-950/85 text-white'
@@ -183,24 +183,24 @@ export default function Navbar() {
           >
             <span
               className={[
-                'cloudflow-brand-mark relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border text-sm font-bold shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-colors duration-300',
+                'EaseWorkflow-brand-mark relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border text-sm font-bold shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-colors duration-300',
                 theme === 'dark'
                   ? 'border-cyan-400/30 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.35),rgba(15,23,42,0.95))] text-cyan-100'
                   : 'border-sky-200/80 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),rgba(224,242,254,0.88))] text-slate-900 shadow-[0_0_24px_rgba(59,130,246,0.12)]',
               ].join(' ')}
             >
-              C
+              E
               <span className="absolute inset-0 rounded-full bg-linear-to-br from-cyan-400/25 via-transparent to-fuchsia-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </span>
             <span
               className={[
-                'cloudflow-brand-wordmark bg-clip-text text-base font-semibold tracking-[0.18em] transition-colors duration-300',
+                'EaseWorkflow-brand-wordmark bg-clip-text text-base font-semibold tracking-[0.18em] transition-colors duration-300',
                 theme === 'dark'
                   ? 'bg-linear-to-r from-white via-cyan-100 to-sky-300 text-transparent'
                   : 'bg-linear-to-r from-slate-950 via-sky-700 to-cyan-700 text-transparent',
               ].join(' ')}
             >
-              CloudFlow
+              EaseWorkflow
             </span>
           </Link>
         </motion.div>
