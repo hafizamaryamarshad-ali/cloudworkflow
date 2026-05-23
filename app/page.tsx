@@ -1,9 +1,30 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
-import { motion, useReducedMotion, easeOut, easeInOut, useMotionValue, useTransform } from 'framer-motion';
-import { Zap, Code, Package, Users, Workflow, BarChart3, Search, Lightbulb, Palette, Rocket, CheckCircle, Headphones } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion, easeOut, easeInOut, useMotionValue, useTransform } from 'framer-motion';
+import {
+  Zap,
+  Code,
+  Package,
+  Users,
+  Workflow,
+  BarChart3,
+  Search,
+  Lightbulb,
+  Palette,
+  Rocket,
+  Headphones,
+  BriefcaseMedical,
+  Bot,
+  DatabaseZap,
+  ScanSearch,
+  Radar,
+  SearchCheck,
+  BrainCircuit,
+  ShieldCheck,
+  ArrowRight,
+  type LucideIcon,
+} from 'lucide-react';
 import { scrollToSection } from '@/lib/scrollToSection';
 
 export default function Home() {
@@ -839,56 +860,139 @@ function ServiceCard({ service, index, itemVariants, shouldReduceMotion }: any) 
   );
 }
 
+type PortfolioProject = {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  icon: LucideIcon;
+  accent: string;
+  highlight: string;
+};
+
+type ProjectStat = {
+  value: number;
+  suffix: string;
+  label: string;
+};
+
 function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
-  const projects = [
+  const reduceMotion = Boolean(shouldReduceMotion);
+  const [activeCategory, setActiveCategory] = useState('All Projects');
+  const [statsVisible, setStatsVisible] = useState(false);
+
+  const projects: PortfolioProject[] = [
     {
       id: 1,
-      title: 'Healthcare Platform',
-      description: 'HIPAA-compliant patient management system with real-time telemedicine capabilities',
-      tech: ['React', 'Node.js', 'PostgreSQL', 'WebRTC'],
-      color: 'from-blue-500 to-cyan-500',
-      icon: '🏥',
+      title: 'HIPAA-Compliant EHR Automation',
+      category: 'Healthcare Automation',
+      description:
+        'Seamlessly automated CRM-to-EHR data entry with secure, HIPAA-compliant healthcare workflows, reducing manual administrative workload and improving operational efficiency.',
+      tags: ['HIPAA', 'EHR Sync', 'Secure Automation'],
+      icon: ShieldCheck,
+      accent: 'from-cyan-400 via-blue-500 to-sky-500',
+      highlight: 'Streamlined clinical operations with protected data handling.',
     },
     {
       id: 2,
-      title: 'Restaurant Website',
-      description: 'Full-stack restaurant platform with online ordering, menu management, and delivery tracking',
-      tech: ['Next.js', 'Stripe', 'Google Maps', 'Tailwind'],
-      color: 'from-orange-500 to-red-500',
-      icon: '🍕',
+      title: 'Custom Healthcare CRM',
+      category: 'Healthcare CRM',
+      description:
+        'Built a tailored healthcare CRM featuring automated reminders, patient follow-ups, communication workflows, and centralized patient management.',
+      tags: ['Patient Ops', 'Workflow CRM', 'Follow-up Automation'],
+      icon: BriefcaseMedical,
+      accent: 'from-emerald-400 via-cyan-500 to-blue-500',
+      highlight: 'Designed to keep care teams organized and responsive.',
     },
     {
       id: 3,
-      title: 'AI Automation Dashboard',
-      description: 'Intelligent workflow automation platform with machine learning and custom integrations',
-      tech: ['Python', 'React', 'TensorFlow', 'AWS'],
-      color: 'from-purple-500 to-pink-500',
-      icon: '🤖',
+      title: 'Multi-Platform Job Apply Automation',
+      category: 'Workflow Automation',
+      description:
+        'Developed automation systems capable of applying to jobs across 5+ major job platforms, multiple ATS systems, and company career portals.',
+      tags: ['ATS Coverage', 'Platform Agnostic', 'Automation'],
+      icon: Workflow,
+      accent: 'from-blue-400 via-cyan-500 to-indigo-500',
+      highlight: 'Built for high-volume, multi-channel application execution.',
     },
     {
       id: 4,
-      title: 'CRM System',
-      description: 'Enterprise-grade CRM with pipeline management, forecasting, and sales analytics',
-      tech: ['Vue.js', 'Express', 'MongoDB', 'Chart.js'],
-      color: 'from-green-500 to-emerald-500',
-      icon: '📊',
+      title: 'Autonomous AI Job Agent',
+      category: 'AI Agent',
+      description:
+        'Created an AI-powered autonomous job search assistant that generates optimized resumes, personalized cover letters, and intelligently applies for relevant positions.',
+      tags: ['AI Agent', 'Resume Optimization', 'Personalized Outreach'],
+      icon: Bot,
+      accent: 'from-fuchsia-400 via-violet-500 to-cyan-500',
+      highlight: 'Acts as a self-directed job search and application engine.',
     },
     {
       id: 5,
-      title: 'Real Estate Platform',
-      description: 'Property marketplace with virtual tours, mortgage calculator, and agent management',
-      tech: ['Next.js', 'Firebase', '3D.js', 'Mapbox'],
-      color: 'from-amber-500 to-yellow-500',
-      icon: '🏠',
+      title: 'AI-Powered Smart CRM',
+      category: 'AI CRM System',
+      description:
+        'Designed an intelligent CRM platform automating lead management, outreach campaigns, follow-ups, pipeline tracking, and AI-generated client responses.',
+      tags: ['Lead Ops', 'Pipeline Intelligence', 'Client Messaging'],
+      icon: DatabaseZap,
+      accent: 'from-cyan-400 via-emerald-500 to-teal-500',
+      highlight: 'Blends sales operations with AI-driven decision support.',
     },
     {
       id: 6,
-      title: 'SaaS Admin Dashboard',
-      description: 'Comprehensive analytics dashboard with real-time data visualization and reporting',
-      tech: ['React', 'GraphQL', 'D3.js', 'TypeScript'],
-      color: 'from-cyan-500 to-blue-500',
-      icon: '📈',
+      title: 'Enterprise OCR Automation',
+      category: 'OCR & Document AI',
+      description:
+        'Built scalable OCR automation systems capable of extracting, processing, and structuring handwritten and scanned documents at commercial scale.',
+      tags: ['OCR', 'Document AI', 'Data Structuring'],
+      icon: ScanSearch,
+      accent: 'from-amber-400 via-orange-500 to-rose-500',
+      highlight: 'Engineered for document-heavy enterprise operations.',
     },
+    {
+      id: 7,
+      title: 'AI Meeting & Interview Assistant',
+      category: 'AI Assistant',
+      description:
+        'Advanced real-time AI assistant for meetings and interviews with live support, smart suggestions, contextual insights, and productivity enhancement features.',
+      tags: ['Real-Time Support', 'Context Awareness', 'Productivity'],
+      icon: BrainCircuit,
+      accent: 'from-indigo-400 via-sky-500 to-cyan-500',
+      highlight: 'Delivers live guidance during high-stakes conversations.',
+    },
+    {
+      id: 8,
+      title: 'Data Scraping & Crawling Systems',
+      category: 'Data Engineering',
+      description:
+        'Developed 30+ high-performance web scraping and crawling systems for large-scale data extraction, monitoring, and processing pipelines.',
+      tags: ['Data Pipelines', 'Monitoring', 'High Throughput'],
+      icon: Radar,
+      accent: 'from-slate-300 via-cyan-400 to-blue-500',
+      highlight: 'Supports dependable extraction across large data estates.',
+    },
+    {
+      id: 9,
+      title: 'Autonomous Lead Generation Agent',
+      category: 'Lead Generation AI',
+      description:
+        'Built an AI-powered lead generation system that discovers high-value prospects, gathers contact data, and generates personalized outreach insights automatically.',
+      tags: ['Prospect Discovery', 'Contact Enrichment', 'AI Outreach'],
+      icon: SearchCheck,
+      accent: 'from-emerald-400 via-cyan-500 to-blue-500',
+      highlight: 'Creates a repeatable pipeline for targeted business growth.',
+    },
+  ];
+
+  const filters = ['All Projects', ...projects.map((project) => project.category)];
+  const visibleProjects =
+    activeCategory === 'All Projects' ? projects : projects.filter((project) => project.category === activeCategory);
+
+  const stats: ProjectStat[] = [
+    { value: 9, suffix: '', label: 'Flagship projects' },
+    { value: 5, suffix: '+', label: 'Core business sectors' },
+    { value: 30, suffix: '+', label: 'Automation systems' },
+    { value: 100, suffix: '%', label: 'Responsive delivery' },
   ];
 
   const containerVariants = {
@@ -914,28 +1018,46 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
     },
   };
 
+  const statVariants = {
+    hidden: { opacity: 0, y: 14 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: reduceMotion ? 0 : 0.45,
+        ease: easeOut,
+      },
+    },
+  };
+
   return (
-    <section id="projects" className="cloudflow-section cloudflow-section--projects relative w-full py-20 sm:py-32 bg-zinc-950 overflow-hidden scroll-mt-28 sm:scroll-mt-32">
+    <section id="projects" className="cloudflow-section cloudflow-section--projects relative w-full overflow-hidden bg-[#050816] py-20 sm:py-32 scroll-mt-28 sm:scroll-mt-32">
       {/* Background decorative elements */}
       <motion.div
         animate={{
           opacity: [0.15, 0.3, 0.15],
           scale: [1, 1.08, 1],
         }}
-        transition={{ duration: shouldReduceMotion ? 0 : 9, repeat: Infinity, ease: easeInOut }}
-        className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-blue-500/8 blur-3xl pointer-events-none"
+        transition={{ duration: reduceMotion ? 0 : 9, repeat: Infinity, ease: easeInOut }}
+        className="absolute top-1/4 -right-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{
           opacity: [0.1, 0.25, 0.1],
           scale: [1, 1.12, 1],
         }}
-        transition={{ duration: shouldReduceMotion ? 0 : 11, repeat: Infinity, delay: 2, ease: easeInOut }}
-        className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-cyan-500/8 blur-3xl pointer-events-none"
+        transition={{ duration: reduceMotion ? 0 : 11, repeat: Infinity, delay: 2, ease: easeInOut }}
+        className="absolute bottom-1/4 -left-40 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"
+      />
+      <motion.div
+        animate={{ opacity: [0.08, 0.18, 0.08], y: [0, -12, 0] }}
+        transition={{ duration: reduceMotion ? 0 : 10, repeat: Infinity, ease: easeInOut }}
+        className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
       />
 
       {/* Grid background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.02)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-15" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.06)_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none opacity-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,6,23,0.1),rgba(2,6,23,0.72)_18%,rgba(2,6,23,0.98))] pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -950,13 +1072,13 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           {/* Section label */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-3 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8 sm:mb-10"
+            className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-white/5 px-4 py-2 mb-8 sm:mb-10 backdrop-blur-xl"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 animate-pulse opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
             </span>
-            <span className="text-sm font-semibold text-cyan-200 tracking-widest uppercase">Featured Work</span>
+            <span className="text-sm font-semibold tracking-[0.28em] text-cyan-200 uppercase">Enterprise Portfolio</span>
           </motion.div>
 
           {/* Main heading */}
@@ -965,10 +1087,10 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
             variants={itemVariants}
             className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-              Our Latest{' '}
-              <span className="block bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-                Projects & Case Studies
+            <h2 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+              All Projects
+              <span className="mt-3 block bg-linear-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+                Premium AI Automation Portfolio
               </span>
             </h2>
           </motion.div>
@@ -976,10 +1098,70 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed"
+            className="mx-auto max-w-3xl text-lg leading-relaxed text-zinc-300 sm:text-xl"
           >
-            Showcase of innovative projects we've built for clients across various industries
+            A high-trust portfolio of AI, automation, CRM, OCR, scraping, and healthcare systems designed for enterprise impact.
           </motion.p>
+        </motion.div>
+
+        {/* Stats strip */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.35 }}
+          onViewportEnter={() => setStatsVisible(true)}
+          className="mb-10 grid grid-cols-2 gap-4 sm:mb-14 lg:grid-cols-4"
+        >
+          {stats.map((stat) => (
+            <motion.div
+              key={stat.label}
+              variants={statVariants}
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 text-left shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-400/25"
+            >
+              <div className="absolute inset-0 bg-linear-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10 opacity-80" />
+              <div className="relative">
+                <AnimatedCounter end={stat.value} suffix={stat.suffix} active={statsVisible} reduceMotion={reduceMotion} />
+                <p className="mt-2 text-sm font-medium text-zinc-400">{stat.label}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Filter bar */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="mb-10 flex flex-wrap items-center justify-center gap-3 sm:mb-14"
+        >
+          {filters.map((filter) => {
+            const isActive = activeCategory === filter;
+            const filterCount = filter === 'All Projects' ? projects.length : projects.filter((project) => project.category === filter).length;
+
+            return (
+              <motion.button
+                key={filter}
+                variants={itemVariants}
+                type="button"
+                onClick={() => setActiveCategory(filter)}
+                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                className={[
+                  'inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300',
+                  isActive
+                    ? 'border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.7))] text-white shadow-[0_16px_50px_rgba(34,211,238,0.18)]'
+                    : 'border-white/10 bg-white/5 text-zinc-300 hover:border-cyan-300/20 hover:bg-white/8 hover:text-white',
+                ].join(' ')}
+              >
+                <span>{filter}</span>
+                <span className={['rounded-full px-2 py-0.5 text-xs font-semibold', isActive ? 'bg-white/14 text-white' : 'bg-white/8 text-zinc-400'].join(' ')}>
+                  {filterCount}
+                </span>
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Projects Grid */}
@@ -988,22 +1170,67 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 sm:gap-8"
         >
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} itemVariants={itemVariants} shouldReduceMotion={shouldReduceMotion} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} itemVariants={itemVariants} shouldReduceMotion={reduceMotion} />
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
   );
 }
 
-function ProjectCard({ project, itemVariants, shouldReduceMotion }: any) {
+function AnimatedCounter({ end, suffix, active, reduceMotion }: { end: number; suffix: string; active: boolean; reduceMotion: boolean }) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!active) {
+      return;
+    }
+
+    if (reduceMotion) {
+      const frame = window.requestAnimationFrame(() => setValue(end));
+      return () => window.cancelAnimationFrame(frame);
+      return;
+    }
+
+    let frame = 0;
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      setValue(Math.round(end * eased));
+
+      if (progress < 1) {
+        frame = window.requestAnimationFrame(tick);
+      }
+    };
+
+    frame = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [active, end, reduceMotion]);
+
+  return (
+    <div className="flex items-end gap-1">
+      <span className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{value}</span>
+      <span className="pb-1 text-lg font-semibold text-cyan-300">{suffix}</span>
+    </div>
+  );
+}
+
+function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: PortfolioProject; itemVariants: any; shouldReduceMotion: boolean }) {
   return (
     <motion.div
       variants={itemVariants}
-      whileHover={shouldReduceMotion ? undefined : { y: -12 }}
+      layout
+      whileHover={shouldReduceMotion ? undefined : { y: -10, scale: 1.01 }}
       transition={{ duration: 0.35, type: 'spring', stiffness: 300, damping: 25 }}
       className="group relative h-full"
     >
@@ -1012,91 +1239,111 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: any) {
         animate={{ opacity: 0, scale: 1 }}
         whileHover={{
           opacity: shouldReduceMotion ? 0 : 1,
-          scale: shouldReduceMotion ? 1 : 1.08,
+          scale: shouldReduceMotion ? 1 : 1.06,
         }}
         transition={{ duration: 0.4 }}
-        className={`absolute inset-0 rounded-2xl bg-linear-to-br ${project.color}/25 opacity-30 blur-xl -z-10`}
+        className={`absolute inset-0 rounded-[1.75rem] bg-linear-to-br ${project.accent} opacity-30 blur-2xl -z-10`}
       />
 
       {/* Card container */}
-      <div className="relative h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300 group-hover:border-cyan-400/40 group-hover:bg-white/8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] group-hover:shadow-[0_20px_60px_rgba(34,211,238,0.15)]">
+      <div className="relative h-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.92),rgba(15,23,42,0.84))] shadow-[0_20px_70px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:shadow-[0_24px_90px_rgba(34,211,238,0.16)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.10),transparent_32%)] opacity-80" />
+
         {/* Image preview area */}
         <motion.div
           animate={{ scale: 1 }}
-          whileHover={{ scale: shouldReduceMotion ? 1 : 1.05 }}
+          whileHover={{ scale: shouldReduceMotion ? 1 : 1.03 }}
           transition={{ duration: 0.4 }}
-          className={`relative h-48 sm:h-56 bg-linear-to-br ${project.color} overflow-hidden`}
+          className={`relative h-44 overflow-hidden bg-linear-to-br ${project.accent} sm:h-52`}
         >
           {/* Animated gradient overlay */}
           <motion.div
             animate={{ opacity: 0.4 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.4 : 0.6 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent to-transparent"
+            className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent"
           />
 
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_40%,rgba(255,255,255,0.03))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_48%)]" />
+
           {/* Icon */}
-          <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-40 group-hover:opacity-60 transition-opacity duration-300">
-            {project.icon}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-white/15 bg-white/10 text-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
+              <project.icon className="h-10 w-10 sm:h-11 sm:w-11" strokeWidth={1.75} />
+            </div>
+          </div>
+
+          <div className="absolute left-4 top-4 inline-flex items-center rounded-full border border-white/15 bg-slate-950/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md">
+            {project.category}
           </div>
         </motion.div>
 
         {/* Content area */}
-        <div className="p-6 sm:p-8">
+        <div className="relative p-6 sm:p-8">
           {/* Top accent line */}
           <motion.div
-            animate={{ opacity: 0.3 }}
+            animate={{ opacity: 0.35 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.3 : 1 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/50 to-transparent"
+            className="absolute left-6 right-6 top-0 h-px bg-linear-to-r from-transparent via-cyan-300/70 to-transparent"
           />
 
           {/* Title */}
           <motion.h3
             animate={{ color: 'rgb(255, 255, 255)' }}
             whileHover={{ color: shouldReduceMotion ? 'rgb(255, 255, 255)' : 'rgb(165, 230, 255)' }}
-            className="text-xl sm:text-2xl font-bold mb-3 transition-colors duration-300"
+            className="mb-3 text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-[1.35rem]"
           >
             {project.title}
           </motion.h3>
+
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-cyan-200/80">
+            {project.highlight}
+          </p>
 
           {/* Description */}
           <motion.p
             animate={{ opacity: 0.65 }}
             whileHover={{ opacity: shouldReduceMotion ? 0.65 : 0.85 }}
-            className="text-zinc-400 text-sm sm:text-base mb-4 leading-relaxed transition-opacity duration-300"
+            className="mb-5 text-sm leading-relaxed text-zinc-300 transition-opacity duration-300 sm:text-[0.98rem]"
           >
             {project.description}
           </motion.p>
 
-          {/* Tech stack tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tech.map((tech: string, idx: number) => (
+          {/* Project tags */}
+          <div className="mb-6 flex flex-wrap gap-2">
+            {project.tags.map((tag: string, idx: number) => (
               <motion.span
                 key={idx}
                 animate={{ scale: 1, opacity: 0.7 }}
                 whileHover={{ scale: shouldReduceMotion ? 1 : 1.05, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-950/50 px-3 py-1 text-xs font-semibold text-cyan-200 backdrop-blur-sm"
+                className="inline-flex items-center rounded-full border border-cyan-300/15 bg-white/6 px-3 py-1 text-xs font-medium text-cyan-100/90 backdrop-blur-sm"
               >
-                {tech}
+                {tag}
               </motion.span>
             ))}
           </div>
 
-          {/* View Project button */}
+          {/* View Details button */}
           <motion.div
             whileHover={shouldReduceMotion ? undefined : { x: 4 }}
             transition={{ duration: 0.3 }}
           >
-            <button className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-400 group/btn hover:text-cyan-300 transition-colors duration-300">
-              View Project
+            <button
+              type="button"
+              onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
+              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.75))] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(8,145,178,0.18)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_18px_45px_rgba(8,145,178,0.26)]"
+              aria-label={`View details for ${project.title}`}
+            >
+              View Details
               <motion.span
                 animate={{ x: 0 }}
                 whileHover={{ x: shouldReduceMotion ? 0 : 4 }}
                 transition={{ duration: 0.3 }}
               >
-                →
+                <ArrowRight className="h-4 w-4" />
               </motion.span>
             </button>
           </motion.div>
@@ -1110,7 +1357,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: any) {
             scaleX: shouldReduceMotion ? 0 : 1,
           }}
           transition={{ duration: 0.3 }}
-          className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-blue-400/50 to-transparent origin-left"
+          className="absolute bottom-0 left-0 right-0 h-px origin-left bg-linear-to-r from-transparent via-cyan-300/60 to-transparent"
         />
       </div>
     </motion.div>
