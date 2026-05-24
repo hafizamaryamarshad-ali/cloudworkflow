@@ -26,10 +26,31 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { scrollToSection } from '@/lib/scrollToSection';
+import { HeroSection } from '@/components/HeroSection';
+import { DEFAULT_THEME, THEME_STORAGE_KEY, type ThemeMode, resolveStoredTheme } from '@/lib/theme';
 
 export default function Home() {
   const shouldReduceMotion = useReducedMotion();
   const [showLoader, setShowLoader] = useState(true);
+  const [theme, setTheme] = useState<ThemeMode>(DEFAULT_THEME);
+  const heroContent = {
+    badge: 'Now Available',
+    title: 'Build Smarter Digital Systems for Modern Businesses',
+    description:
+      'We create automation systems, AI solutions, and premium web platforms that help businesses scale faster.',
+    primaryCta: 'Start Project',
+  };
+
+  useEffect(() => {
+    const attributeTheme = document.documentElement.dataset.theme;
+
+    if (attributeTheme === 'dark' || attributeTheme === 'light') {
+      setTheme(attributeTheme);
+      return;
+    }
+
+    setTheme(resolveStoredTheme(window.localStorage.getItem(THEME_STORAGE_KEY)));
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -62,258 +83,19 @@ export default function Home() {
     },
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [0, -20, 0],
-      transition: {
-        duration: shouldReduceMotion ? 0 : 6,
-        repeat: Infinity,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const pulseVariants = {
-    animate: {
-      scale: [1, 1.2, 1],
-      opacity: [0.3, 0.5, 0.3],
-      transition: {
-        duration: shouldReduceMotion ? 0 : 8,
-        repeat: Infinity,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const driftVariants = {
-    animate: {
-      x: [0, 30, -30, 0],
-      y: [0, -40, 20, 0],
-      transition: {
-        duration: shouldReduceMotion ? 0 : 12,
-        repeat: Infinity,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const slowDriftVariants = {
-    animate: {
-      x: [0, -40, 40, 0],
-      y: [0, 30, -30, 0],
-      transition: {
-        duration: shouldReduceMotion ? 0 : 16,
-        repeat: Infinity,
-        ease: easeInOut,
-      },
-    },
-  };
-
   return (
     <>
-    {showLoader && <Loader />}
-    <section id="home" data-easeworkflow-hero className="easeworkflow-hero relative min-h-[calc(100vh-64px)] w-full overflow-hidden bg-zinc-950 flex items-center justify-center scroll-mt-28 sm:scroll-mt-32">
-      {/* Base gradient backdrop */}
-      <div className="EaseWorkflow-hero-backdrop absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),rgba(30,27,75,0.4),rgba(15,23,42,0.8))] pointer-events-none" />
-
-      {/* Large primary glow orb - floating */}
-      <motion.div
-        variants={driftVariants}
-        animate="animate"
-        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-primary absolute -top-40 -left-40 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"
-      />
-
-      {/* Secondary glow orb - drifting */}
-      <motion.div
-        variants={slowDriftVariants}
-        animate="animate"
-        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-secondary absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-blue-600/12 blur-3xl pointer-events-none"
-      />
-
-      {/* Tertiary accent orb - floating */}
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        className="EaseWorkflow-hero-glow EaseWorkflow-hero-glow-accent absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl pointer-events-none"
-      />
-
-      {/* Accent light ray - top right */}
-      <motion.div
-        animate={{
-          opacity: [0.1, 0.25, 0.1],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: shouldReduceMotion ? 0 : 6, repeat: Infinity, ease: easeInOut }}
-        className="EaseWorkflow-hero-light-ray absolute -top-20 right-1/4 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"
-      />
-
-      {/* Ambient glow - center */}
-      <motion.div
-        variants={pulseVariants}
-        animate="animate"
-        className="EaseWorkflow-hero-ambient absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-cyan-400/8 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"
-      />
-
-      {/* Grid background with gradient */}
-      <div className="EaseWorkflow-hero-grid absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.04)_1px,transparent_1px)] bg-size-[50px_50px] pointer-events-none opacity-50" />
-
-      {/* Radial fade overlay */}
-      <div className="EaseWorkflow-hero-vignette absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] pointer-events-none" />
-
-      {/* Subtle animated light streaks */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.15, 0.05] }}
-        transition={{ duration: shouldReduceMotion ? 0 : 7, repeat: Infinity, ease: easeInOut }}
-        className="EaseWorkflow-hero-streaks absolute inset-0 bg-[linear-gradient(45deg,transparent_0%,rgba(34,211,238,0.03)_50%,transparent_100%)] pointer-events-none"
-      />
-
-      {/* Floating particles effect - top layer */}
-      <div className="EaseWorkflow-hero-particles absolute inset-0 pointer-events-none">
-        {/* Particle 1 */}
-        <motion.div
-          animate={{
-            x: [0, 100, -50, 0],
-            y: [0, -80, 60, 0],
-            opacity: [0, 0.4, 0.2, 0],
-          }}
-          transition={{ duration: shouldReduceMotion ? 0 : 15, repeat: Infinity, ease: easeInOut }}
-          className="absolute top-1/4 left-1/4 w-1 h-1 rounded-full bg-cyan-300/60"
-        />
-        {/* Particle 2 */}
-        <motion.div
-          animate={{
-            x: [0, -120, 80, 0],
-            y: [0, 100, -50, 0],
-            opacity: [0, 0.3, 0.15, 0],
-          }}
-          transition={{ duration: shouldReduceMotion ? 0 : 18, repeat: Infinity, delay: 2, ease: easeInOut }}
-          className="absolute top-1/3 right-1/4 w-1.5 h-1.5 rounded-full bg-blue-300/50"
-        />
-        {/* Particle 3 */}
-        <motion.div
-          animate={{
-            x: [0, 90, -70, 0],
-            y: [0, -120, 80, 0],
-            opacity: [0, 0.25, 0.1, 0],
-          }}
-          transition={{ duration: shouldReduceMotion ? 0 : 20, repeat: Infinity, delay: 4, ease: easeInOut }}
-          className="absolute bottom-1/4 left-1/3 w-1 h-1 rounded-full bg-fuchsia-300/40"
-        />
-      </div>
-
-      {/* Content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-20"
-      >
-        {/* Badge */}
-        <motion.div
-          variants={itemVariants}
-          className="EaseWorkflow-hero-badge inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-950/40 backdrop-blur-sm px-4 py-2 mb-8"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
-          </span>
-          <span className="text-sm font-medium text-cyan-200">Now Available</span>
-        </motion.div>
-
-        {/* Main headline */}
-        <motion.h1
-          variants={itemVariants}
-          className="EaseWorkflow-hero-title text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6"
-        >
-          Build Smarter{' '}
-          <span className="bg-linear-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-            Digital Systems
-          </span>{' '}
-          for Modern Businesses
-        </motion.h1>
-
-        {/* Subheading */}
-        <motion.p
-          variants={itemVariants}
-          className="EaseWorkflow-hero-copy text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-12 leading-relaxed"
-        >
-          We create automation systems, AI solutions, and premium web platforms that help businesses scale faster.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="EaseWorkflow-hero-actions flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto"
-        >
-          {/* Primary CTA Button */}
-          <motion.div
-            whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
-            whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-            transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="EaseWorkflow-hero-primary-wrap w-full sm:w-auto"
-          >
-            <div className="relative group">
-              {/* Glow background */}
-              <div className="absolute inset-0 rounded-full bg-linear-to-r from-cyan-500/50 via-blue-500/50 to-cyan-500/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-              
-              <button
-                type="button"
-                onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
-                className="EaseWorkflow-hero-primary-cta relative inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-r from-cyan-600/95 via-blue-600/95 to-cyan-700/95 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white shadow-[0_8px_32px_rgba(34,211,238,0.3)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.5)] transition-all duration-300 hover:border-cyan-400/50 backdrop-blur-sm"
-              >
-                <span className="relative">Start Project</span>
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Secondary CTA Button */}
-          <motion.div
-            whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.02 }}
-            whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-            transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-            className="EaseWorkflow-hero-secondary-wrap w-full sm:w-auto"
-          >
-            <div className="relative group">
-              {/* Subtle glow background */}
-              <div className="absolute inset-0 rounded-full bg-linear-to-r from-sky-400/30 via-cyan-400/30 to-blue-400/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-              
-              <button
-                type="button"
-                onClick={() => scrollToSection('projects', shouldReduceMotion ? 'auto' : 'smooth')}
-                className="EaseWorkflow-hero-secondary-cta relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-8 sm:px-10 py-3.5 sm:py-4 text-base font-semibold text-white/95 backdrop-blur-md transition-all duration-300 hover:bg-white/12 hover:border-white/35 hover:text-white shadow-[0_8px_32px_rgba(255,255,255,0.05)] hover:shadow-[0_12px_40px_rgba(34,211,238,0.15)]"
-              >
-                <span className="relative">View Work</span>
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Features brief */}
-        <motion.div
-          variants={itemVariants}
-          className="EaseWorkflow-hero-metrics mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-white/10"
-        >
-          <div className="text-center">
-            <div className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
-              500+
-            </div>
-            <div className="text-sm text-zinc-400">Projects Delivered</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
-              98%
-            </div>
-            <div className="text-sm text-zinc-400">Client Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
-              24/7
-            </div>
-            <div className="text-sm text-zinc-400">Support Available</div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
+    <AnimatePresence mode="wait">
+      {showLoader ? <Loader key="easeworkflow-loader" theme={theme} /> : null}
+    </AnimatePresence>
+    <HeroSection
+      badge={heroContent.badge}
+      title={heroContent.title}
+      description={heroContent.description}
+      primaryCta={heroContent.primaryCta}
+      shouldReduceMotion={shouldReduceMotion}
+      onPrimaryAction={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
+    />
 
     {/* Stats Section */}
     <StatsSection shouldReduceMotion={shouldReduceMotion} />
@@ -2882,145 +2664,135 @@ function Footer() {
   );
 }
 
-function Loader() {
+function Loader({ theme }: { theme: ThemeMode }) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, ease: easeOut }}
-      className="EaseWorkflow-loader fixed inset-0 z-50 flex items-center justify-center bg-zinc-950 overflow-hidden"
+      transition={{ duration: 0.45, ease: easeOut }}
+      className="EaseWorkflow-loader fixed inset-0 z-50 overflow-hidden"
     >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Animated gradient orbs */}
-        <motion.div
-          animate={{
-            opacity: [0.15, 0.3, 0.15],
-            scale: [0.8, 1.2, 0.8],
-            rotate: [0, 180, 360],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: easeInOut }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-linear-to-br from-cyan-500 to-blue-500 blur-3xl opacity-20"
-        />
-        <motion.div
-          animate={{
-            opacity: [0.1, 0.25, 0.1],
-            scale: [1, 1.3, 1],
-            rotate: [360, 180, 0],
-          }}
-          transition={{ duration: 10, repeat: Infinity, delay: 1, ease: easeInOut }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-linear-to-br from-blue-500 to-purple-500 blur-3xl opacity-15"
-        />
+      <div
+        className={[
+          'absolute inset-0 transition-colors duration-300',
+          theme === 'dark'
+            ? 'bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_36%),linear-gradient(180deg,rgba(3,8,20,0.98),rgba(8,17,35,0.96),rgba(3,8,20,0.99))]'
+            : 'bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.12),transparent_38%),linear-gradient(180deg,rgba(248,251,255,0.98),rgba(236,243,255,0.96),rgba(243,246,251,0.98))]',
+        ].join(' ')}
+      />
 
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.05)_1px,transparent_1px)] bg-size-[50px_50px] opacity-40" />
-      </div>
+      <motion.div
+        aria-hidden="true"
+        animate={shouldReduceMotion ? undefined : { opacity: [0.18, 0.28, 0.18], scale: [1, 1.02, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: easeInOut }}
+        style={{
+          backgroundSize: theme === 'dark' ? '32px 32px' : '34px 34px',
+        }}
+        className={[
+          'absolute inset-0',
+          theme === 'dark'
+            ? 'bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_1px,transparent_1px)]'
+            : 'bg-[radial-gradient(circle_at_center,rgba(15,23,42,0.05)_1px,transparent_1px)]',
+        ].join(' ')}
+      />
 
-      {/* Center content */}
-      <div className="relative z-10 flex flex-col items-center justify-center gap-8">
-        {/* Animated logo/rings */}
-        <div className="relative w-40 h-40 flex items-center justify-center">
-          {/* Outer pulsing ring */}
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.8, 0.2, 0.8],
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: easeInOut }}
-            className="absolute inset-0 rounded-full border-2 border-cyan-400/40 blur-sm"
-          />
+      <motion.div
+        aria-hidden="true"
+        animate={shouldReduceMotion ? undefined : { x: [0, 18, 0], y: [0, -10, 0], opacity: [0.16, 0.24, 0.16] }}
+        transition={{ duration: 14, repeat: Infinity, ease: easeInOut }}
+        style={{ width: '28rem', height: '28rem' }}
+        className={[
+          'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl',
+          theme === 'dark'
+            ? 'bg-[radial-gradient(circle,rgba(59,130,246,0.18),rgba(15,23,42,0))]'
+            : 'bg-[radial-gradient(circle,rgba(14,165,233,0.14),rgba(255,255,255,0))]',
+        ].join(' ')}
+      />
 
-          {/* Middle rotating ring */}
-          <motion.div
-            animate={{
-              rotate: 360,
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-8 rounded-full border border-cyan-400/30 border-t-cyan-400 border-r-cyan-400/50 border-b-transparent border-l-transparent"
-          />
+      <div className="relative z-10 flex h-full w-full items-center justify-center px-6">
+        <div className="flex w-full max-w-md flex-col items-center text-center">
+          <div className="relative mb-7 flex items-center justify-center">
+            <motion.div
+              aria-hidden="true"
+              animate={shouldReduceMotion ? undefined : { opacity: [0.35, 0.55, 0.35], scale: [0.98, 1.02, 0.98] }}
+              transition={{ duration: 5, repeat: Infinity, ease: easeInOut }}
+              className={[
+                'absolute inset-0 rounded-4xl blur-2xl',
+                theme === 'dark' ? 'bg-cyan-400/10' : 'bg-sky-500/10',
+              ].join(' ')}
+            />
 
-          {/* Inner pulsing ring */}
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.6, 0.3, 0.6],
-            }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: easeInOut }}
-            className="absolute inset-16 rounded-full border-2 border-blue-400/30"
-          />
-
-          {/* Center logo with shimmer */}
-          <motion.div
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.9, 1, 0.9],
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
-            className="relative flex items-center justify-center w-20 h-20"
-          >
-            <div className="text-4xl font-bold bg-linear-to-br from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-              ⚡
+            <div
+              className={[
+                'relative flex h-20 w-20 items-center justify-center rounded-4xl border backdrop-blur-xl',
+                theme === 'dark'
+                  ? 'border-white/10 bg-white/5 shadow-[0_24px_70px_rgba(2,6,23,0.38)]'
+                  : 'border-slate-200/80 bg-white/75 shadow-[0_24px_70px_rgba(15,23,42,0.12)]',
+              ].join(' ')}
+            >
+              <span
+                className={[
+                  'text-2xl font-semibold tracking-[0.3em]',
+                  theme === 'dark' ? 'text-white' : 'text-slate-900',
+                ].join(' ')}
+              >
+                E
+              </span>
             </div>
 
-            {/* Shimmer effect overlay */}
-            <motion.div
-              animate={{
-                x: [-100, 100],
-                opacity: [0, 0.5, 0],
-              }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: easeInOut }}
-              className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent blur-sm rounded-full"
-            />
-          </motion.div>
-        </div>
-
-        {/* Loading text */}
-        <div className="flex flex-col items-center gap-4">
-          <motion.h2
-            animate={{ opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
-            className="text-2xl font-bold text-white text-center"
-          >
-            EaseWorkflow
-          </motion.h2>
-
-          {/* Animated dots */}
-          <div className="flex gap-2 h-2">
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
-              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
-            />
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
-              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
-            />
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
-              className="w-2 h-2 rounded-full bg-linear-to-b from-cyan-400 to-blue-400"
+            <motion.span
+              aria-hidden="true"
+              animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'linear' }}
+              className={[
+                'absolute inset-[-0.4rem] rounded-4xl border',
+                theme === 'dark' ? 'border-cyan-300/20' : 'border-sky-400/20',
+              ].join(' ')}
             />
           </div>
 
-          {/* Loading message */}
-          <motion.p
-            animate={{ opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, ease: easeInOut }}
-            className="text-xs uppercase tracking-widest text-zinc-400 mt-4"
-          >
-            Loading premium experience...
-          </motion.p>
+          <div className="space-y-3">
+            <h1
+              className={[
+                'text-[0.96rem] font-semibold uppercase tracking-[0.38em]',
+                theme === 'dark' ? 'text-white/92' : 'text-slate-900/92',
+              ].join(' ')}
+            >
+              EaseWorkflow
+            </h1>
+            <p
+              className={[
+                'text-sm leading-6',
+                theme === 'dark' ? 'text-slate-300' : 'text-slate-600',
+              ].join(' ')}
+            >
+              Automating Healthcare Operations with AI
+            </p>
+          </div>
+
+          <div className="mt-8 flex w-full max-w-52 items-center justify-center gap-3">
+            <div className={theme === 'dark' ? 'h-px flex-1 bg-linear-to-r from-transparent via-white/12 to-transparent' : 'h-px flex-1 bg-linear-to-r from-transparent via-slate-300/80 to-transparent'} />
+            <motion.div
+              animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
+              className={[
+                'relative flex h-6 w-6 items-center justify-center rounded-full border',
+                theme === 'dark' ? 'border-white/10 bg-white/5' : 'border-slate-200 bg-white/80',
+              ].join(' ')}
+            >
+              <span className={theme === 'dark' ? 'absolute inset-1 rounded-full border border-cyan-300/70 border-r-transparent border-b-transparent' : 'absolute inset-1 rounded-full border border-sky-500/70 border-r-transparent border-b-transparent'} />
+            </motion.div>
+            <div className={theme === 'dark' ? 'h-px flex-1 bg-linear-to-r from-transparent via-white/12 to-transparent' : 'h-px flex-1 bg-linear-to-r from-transparent via-slate-300/80 to-transparent'} />
+          </div>
+
+          <p className={['mt-3 text-[0.7rem] font-medium uppercase tracking-[0.34em]', theme === 'dark' ? 'text-slate-400' : 'text-slate-500'].join(' ')}>
+            Secure system loading
+          </p>
         </div>
       </div>
-
-      {/* Fade out background */}
-      <motion.div
-        animate={{ opacity: [0, 0, 0] }}
-        transition={{ duration: 2.5, times: [0, 0.9, 1] }}
-        className="absolute inset-0 bg-zinc-950 pointer-events-none"
-      />
     </motion.div>
   );
 }

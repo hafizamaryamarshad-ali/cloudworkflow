@@ -52,6 +52,77 @@
   --projects-button-border: rgba(125, 211, 252, 0.16);
   --projects-button-shadow: 0 10px 28px rgba(2, 6, 23, 0.18);
   --projects-button-shadow-hover: 0 14px 36px rgba(15, 23, 42, 0.22);
+  --hero-background:
+    linear-gradient(180deg, rgba(248, 251, 255, 0.98) 0%, rgba(241, 246, 255, 0.98) 42%, rgba(230, 239, 255, 0.96) 100%);
+  --hero-backdrop:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 30%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(237, 244, 255, 0.72));
+  --hero-grid: radial-gradient(circle at center, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  --hero-text: #0f172a;
+  --hero-muted: #475569;
+  --hero-subtle: #64748b;
+  --hero-border: rgba(15, 23, 42, 0.08);
+  --hero-surface: rgba(255, 255, 255, 0.82);
+  --hero-surface-strong: rgba(255, 255, 255, 0.94);
+  --hero-shadow: 0 24px 80px rgba(15, 23, 42, 0.09);
+  --hero-pill-bg: rgba(255, 255, 255, 0.84);
+  --hero-pill-border: rgba(37, 99, 235, 0.16);
+  --hero-pill-text: #0369a1;
+  --hero-title-gradient: linear-gradient(90deg, #0f172a 0%, #0369a1 48%, #2563eb 100%);
+  --hero-primary-bg: linear-gradient(135deg, rgba(29, 78, 216, 0.98), rgba(14, 165, 233, 0.96), rgba(59, 130, 246, 0.94));
+  --hero-primary-border: rgba(29, 78, 216, 0.16);
+  --hero-primary-text: #ffffff;
+  --hero-primary-shadow: 0 18px 44px rgba(37, 99, 235, 0.22);
+  --hero-secondary-bg: rgba(255, 255, 255, 0.86);
+  --hero-secondary-border: rgba(37, 99, 235, 0.12);
+  --hero-secondary-text: #0f172a;
+  --hero-card-bg: rgba(255, 255, 255, 0.76);
+  --hero-card-border: rgba(15, 23, 42, 0.08);
+  --hero-card-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+  --hero-line: rgba(37, 99, 235, 0.28);
+  --hero-node: rgba(37, 99, 235, 0.96);
+  --hero-node-ring: rgba(37, 99, 235, 0.18);
+  --hero-node-glow: rgba(37, 99, 235, 0.24);
+  --hero-network-line: rgba(37, 99, 235, 0.18);
+  --hero-network-line-strong: rgba(37, 99, 235, 0.32);
+}
+
+:root[data-theme='dark'] {
+  --hero-background:
+    linear-gradient(180deg, rgba(3, 8, 20, 0.98) 0%, rgba(8, 17, 35, 0.98) 42%, rgba(3, 8, 20, 0.99) 100%);
+  --hero-backdrop:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.76), rgba(8, 15, 32, 0.82));
+  --hero-grid: radial-gradient(circle at center, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  --hero-text: #f8fafc;
+  --hero-muted: #cbd5e1;
+  --hero-subtle: #94a3b8;
+  --hero-border: rgba(255, 255, 255, 0.1);
+  --hero-surface: rgba(15, 23, 42, 0.62);
+  --hero-surface-strong: rgba(15, 23, 42, 0.8);
+  --hero-shadow: 0 28px 90px rgba(2, 6, 23, 0.34);
+  --hero-pill-bg: rgba(255, 255, 255, 0.05);
+  --hero-pill-border: rgba(125, 211, 252, 0.18);
+  --hero-pill-text: #bae6fd;
+  --hero-title-gradient: linear-gradient(90deg, #f8fafc 0%, #bae6fd 48%, #7dd3fc 100%);
+  --hero-primary-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.96), rgba(37, 99, 235, 0.95), rgba(30, 64, 175, 0.94));
+  --hero-primary-border: rgba(125, 211, 252, 0.18);
+  --hero-primary-text: #ffffff;
+  --hero-primary-shadow: 0 20px 50px rgba(14, 165, 233, 0.22);
+  --hero-secondary-bg: rgba(255, 255, 255, 0.05);
+  --hero-secondary-border: rgba(255, 255, 255, 0.12);
+  --hero-secondary-text: #f8fafc;
+  --hero-card-bg: rgba(15, 23, 42, 0.54);
+  --hero-card-border: rgba(255, 255, 255, 0.1);
+  --hero-card-shadow: 0 24px 70px rgba(2, 6, 23, 0.34);
+  --hero-line: rgba(125, 211, 252, 0.3);
+  --hero-node: rgba(125, 211, 252, 0.96);
+  --hero-node-ring: rgba(125, 211, 252, 0.16);
+  --hero-node-glow: rgba(56, 189, 248, 0.2);
+  --hero-network-line: rgba(125, 211, 252, 0.18);
+  --hero-network-line-strong: rgba(125, 211, 252, 0.3);
 }
 
 :root[data-theme='light'] {
@@ -202,9 +273,125 @@ body {
 }
 
 :root[data-theme='light'] body .EaseWorkflow-hero {
-  background:
-    linear-gradient(180deg, #f8fbff 0%, #eef6ff 45%, #e8f3ff 100%) !important;
-  color: var(--foreground);
+  background: var(--hero-background) !important;
+  color: var(--hero-text);
+}
+
+.EaseWorkflow-hero {
+  background: var(--hero-background);
+  color: var(--hero-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.EaseWorkflow-hero-surface {
+  background: var(--hero-backdrop);
+}
+
+.EaseWorkflow-hero-grid {
+  background-image: var(--hero-grid);
+}
+
+.EaseWorkflow-hero-pill {
+  background: var(--hero-pill-bg);
+  border-color: var(--hero-pill-border);
+  color: var(--hero-pill-text);
+  box-shadow: var(--hero-shadow);
+}
+
+.EaseWorkflow-hero-title {
+  color: var(--hero-text);
+}
+
+.EaseWorkflow-hero-title-accent {
+  background-image: var(--hero-title-gradient);
+}
+
+.EaseWorkflow-hero-copy {
+  color: var(--hero-muted);
+}
+
+.EaseWorkflow-hero-primary-cta {
+  background: var(--hero-primary-bg);
+  border-color: var(--hero-primary-border);
+  color: var(--hero-primary-text);
+  box-shadow: var(--hero-primary-shadow);
+}
+
+.EaseWorkflow-hero-secondary-cta {
+  background: var(--hero-secondary-bg);
+  border-color: var(--hero-secondary-border);
+  color: var(--hero-secondary-text);
+}
+
+.EaseWorkflow-hero-trust-chip {
+  background: var(--hero-surface);
+  border-color: var(--hero-border);
+  color: var(--hero-text);
+}
+
+.EaseWorkflow-hero-panel {
+  background: var(--hero-surface);
+  border-color: var(--hero-border);
+  box-shadow: var(--hero-card-shadow);
+  backdrop-filter: blur(24px);
+}
+
+.EaseWorkflow-hero-network-shell {
+  background: var(--hero-backdrop);
+  border-color: var(--hero-border);
+  box-shadow: var(--hero-shadow);
+}
+
+.EaseWorkflow-hero-card {
+  background: var(--hero-card-bg);
+  border-color: var(--hero-card-border);
+  box-shadow: var(--hero-card-shadow);
+}
+
+.EaseWorkflow-hero-network-card {
+  background: var(--hero-card-bg);
+  border-color: var(--hero-card-border);
+  box-shadow: var(--hero-card-shadow);
+}
+
+.EaseWorkflow-hero-network-line {
+  stroke: var(--hero-network-line);
+}
+
+.EaseWorkflow-hero-network-line-strong {
+  stroke: var(--hero-network-line-strong);
+}
+
+.EaseWorkflow-hero-network-node {
+  fill: var(--hero-node);
+}
+
+.EaseWorkflow-hero-network-node-ring {
+  stroke: var(--hero-node-ring);
+}
+
+.EaseWorkflow-hero-network-node-glow {
+  fill: var(--hero-node-glow);
+}
+
+.EaseWorkflow-hero-live-chip {
+  background: var(--hero-pill-bg);
+  border-color: var(--hero-pill-border);
+  color: var(--hero-pill-text);
+}
+
+.EaseWorkflow-hero-live-card {
+  background: var(--hero-card-bg);
+  border-color: var(--hero-card-border);
+  box-shadow: var(--hero-card-shadow);
+}
+
+.EaseWorkflow-hero-flow-line {
+  background: linear-gradient(90deg, transparent, var(--hero-line), transparent);
+}
+
+.EaseWorkflow-hero-subtle {
+  color: var(--hero-subtle);
 }
 
 :root[data-theme='light'] body .EaseWorkflow-hero-backdrop {
