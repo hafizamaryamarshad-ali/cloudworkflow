@@ -2256,8 +2256,8 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
                   </div>
                   <div>
                     <p className="text-sm text-zinc-400">Email</p>
-                    <a href="mailto:hello@EaseWorkflow.dev" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-cyan-300">
-                      hello@EaseWorkflow.dev
+                    <a href="mailto:hi@easeworkflow.com" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-cyan-300">
+                      hi@easeworkflow.com
                     </a>
                   </div>
                 </div>
@@ -2267,8 +2267,8 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
                   </div>
                   <div>
                     <p className="text-sm text-zinc-400">Phone</p>
-                    <a href="tel:+1234567890" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-blue-300">
-                      +1 (234) 567-890
+                    <a href="https://wa.me/923000335194" className="mt-1 block font-medium text-white transition-colors duration-300 hover:text-blue-300">
+                      +92 3000335194
                     </a>
                   </div>
                 </div>
@@ -2278,7 +2278,7 @@ function ContactSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | 
                   </div>
                   <div>
                     <p className="text-sm text-zinc-400">Location</p>
-                    <p className="mt-1 font-medium text-white">San Francisco, CA</p>
+                    <p className="mt-1 font-medium text-white">Faisalabad, Pakistan</p>
                   </div>
                 </div>
               </motion.div>
