@@ -210,6 +210,73 @@ body {
   color: #ffffff;
 }
 
+/* ===== Themed scrollbar (cyan → blue, matches site accents) ===== */
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.55) transparent;
+}
+
+/* WebKit / Chromium / Edge / Safari */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-color: rgba(34, 211, 238, 0.5);
+  background-image: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.9),
+    rgba(59, 130, 246, 0.9)
+  );
+  transition: background-image 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 1),
+    rgba(99, 102, 241, 1)
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Light theme variant (sky → blue on a soft track) */
+:root[data-theme='light'] {
+  scrollbar-color: rgba(14, 165, 233, 0.55) transparent;
+}
+
+:root[data-theme='light'] ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    180deg,
+    rgba(14, 165, 233, 0.95),
+    rgba(37, 99, 235, 0.95)
+  );
+}
+
+:root[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(2, 132, 199, 1),
+    rgba(29, 78, 216, 1)
+  );
+}
+
 :root[data-theme='light'] body {
   background:
     radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 30%),
