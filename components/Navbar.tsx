@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { scrollToSection as sharedScrollToSection } from '@/lib/scrollToSection';
@@ -180,17 +181,16 @@ export default function Navbar() {
               scrollToSection('home');
             }}
           >
-            <span
-              className={[
-                'EaseWorkflow-brand-mark relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border text-sm font-bold shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-colors duration-300',
-                theme === 'dark'
-                  ? 'border-cyan-400/30 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.35),rgba(15,23,42,0.95))] text-cyan-100'
-                  : 'border-sky-200/80 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),rgba(224,242,254,0.88))] text-slate-900 shadow-[0_0_24px_rgba(59,130,246,0.12)]',
-              ].join(' ')}
-            >
-              E
-              <span className="absolute inset-0 rounded-full bg-linear-to-br from-cyan-400/25 via-transparent to-fuchsia-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            </span>
+            <Image
+              src="/logo199.svg"
+              alt="EaseWorkflow"
+              width={75}
+              height={36}
+              priority
+              unoptimized
+              draggable={false}
+              className="EaseWorkflow-brand-mark h-8 w-auto select-none transition-transform duration-300 sm:h-9"
+            />
             <span
               className={[
                 'EaseWorkflow-brand-wordmark bg-clip-text text-base font-semibold tracking-[0.18em] transition-colors duration-300',
