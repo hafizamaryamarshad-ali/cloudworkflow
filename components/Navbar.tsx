@@ -153,14 +153,14 @@ export default function Navbar() {
     >
       <nav
         aria-label="Primary"
-        className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-6 lg:px-8"
       >
         <motion.div
           whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
           whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
           transition={{ duration: 0.2 }}
           className={[
-            'EaseWorkflow-brand-shell relative flex items-center gap-3 rounded-full border px-4 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-colors duration-300',
+            'EaseWorkflow-brand-shell relative flex min-w-0 items-center gap-3 rounded-full border px-2.5 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-md transition-colors duration-300 sm:px-4 sm:backdrop-blur-xl',
             isScrolled
               ? theme === 'dark'
                 ? 'border-white/12 bg-zinc-950/85 text-white'
@@ -173,7 +173,7 @@ export default function Navbar() {
           <Link
             href="/#home"
             className={[
-              'group flex items-center gap-3 text-sm font-semibold tracking-[0.22em] uppercase transition-colors duration-300',
+              'group flex min-w-0 items-center gap-2 text-sm font-semibold tracking-[0.22em] uppercase transition-colors duration-300 sm:gap-3',
               theme === 'dark' ? 'text-white' : 'text-slate-900',
             ].join(' ')}
             onClick={(event) => {
@@ -189,11 +189,11 @@ export default function Navbar() {
               priority
               unoptimized
               draggable={false}
-              className="EaseWorkflow-brand-mark h-8 w-auto select-none transition-transform duration-300 sm:h-9"
+              className="EaseWorkflow-brand-mark h-7 w-auto shrink-0 select-none transition-transform duration-300 sm:h-9"
             />
             <span
               className={[
-                'EaseWorkflow-brand-wordmark bg-clip-text text-base font-semibold tracking-[0.18em] transition-colors duration-300',
+                'EaseWorkflow-brand-wordmark min-w-0 truncate bg-clip-text text-xs font-semibold tracking-[0.02em] transition-colors duration-300 min-[400px]:text-sm min-[400px]:tracking-[0.08em] sm:text-base sm:tracking-[0.18em]',
                 theme === 'dark'
                   ? 'bg-linear-to-r from-white via-cyan-100 to-sky-300 text-transparent'
                   : 'bg-linear-to-r from-slate-950 via-sky-700 to-cyan-700 text-transparent',
@@ -255,7 +255,7 @@ export default function Navbar() {
           </motion.div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <motion.button
             type="button"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -265,7 +265,7 @@ export default function Navbar() {
             whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
             transition={{ duration: 0.2 }}
             className={[
-              'group relative inline-flex h-12 w-20 items-center rounded-full border px-1.5 backdrop-blur-xl transition-colors duration-300',
+              'group relative inline-flex h-12 w-16 items-center rounded-full border px-1.5 backdrop-blur-md transition-colors duration-300 sm:w-20 sm:backdrop-blur-xl',
               theme === 'dark'
                 ? 'border-cyan-300/15 bg-zinc-950/65 text-white shadow-[0_12px_40px_rgba(0,0,0,0.22)]'
                 : 'border-sky-200/70 bg-white/80 text-slate-900 shadow-[0_12px_40px_rgba(15,23,42,0.14)]',
@@ -279,7 +279,7 @@ export default function Navbar() {
                 'absolute top-1.5 flex h-9 w-9 items-center justify-center rounded-full border shadow-lg',
                 theme === 'dark'
                   ? 'translate-x-0 border-cyan-300/20 bg-[linear-gradient(145deg,rgba(34,211,238,0.95),rgba(15,23,42,0.95))] text-cyan-50'
-                  : 'translate-x-8 border-sky-200/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.98),rgba(224,242,254,0.95))] text-sky-700',
+                  : 'translate-x-4 border-sky-200/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.98),rgba(224,242,254,0.95))] text-sky-700 sm:translate-x-8',
               ].join(' ')}
             >
               {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
@@ -296,7 +296,12 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsMenuOpen((current) => !current)}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-zinc-950/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform duration-200 hover:-translate-y-0.5 hover:border-cyan-300/25 lg:hidden"
+            className={[
+              'inline-flex h-12 w-12 items-center justify-center rounded-full border backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:border-cyan-300/25 lg:hidden',
+              theme === 'dark'
+                ? 'border-white/10 bg-zinc-950/60 text-white shadow-[0_12px_40px_rgba(0,0,0,0.22)]'
+                : 'border-sky-200/70 bg-white/80 text-slate-900 shadow-[0_12px_40px_rgba(15,23,42,0.14)]',
+            ].join(' ')}
           >
             <span className="sr-only">Toggle navigation menu</span>
             <motion.span
@@ -304,17 +309,17 @@ export default function Navbar() {
               className="relative block h-4 w-5"
             >
               <motion.span
-                className="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-white"
+                className={`absolute left-0 top-0 h-0.5 w-5 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-slate-900'}`}
                 variants={{ closed: { y: 0, rotate: 0 }, open: { y: 6, rotate: 45 } }}
                 transition={{ duration: 0.2 }}
               />
               <motion.span
-                className="absolute left-0 top-2 h-0.5 w-5 rounded-full bg-white"
+                className={`absolute left-0 top-2 h-0.5 w-5 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-slate-900'}`}
                 variants={{ closed: { opacity: 1, scaleX: 1 }, open: { opacity: 0, scaleX: 0 } }}
                 transition={{ duration: 0.15 }}
               />
               <motion.span
-                className="absolute left-0 top-4 h-0.5 w-5 rounded-full bg-white"
+                className={`absolute left-0 top-4 h-0.5 w-5 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-slate-900'}`}
                 variants={{ closed: { y: 0, rotate: 0 }, open: { y: -6, rotate: -45 } }}
                 transition={{ duration: 0.2 }}
               />
@@ -334,7 +339,7 @@ export default function Navbar() {
             exit="exit"
             variants={menuVariants}
             transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: 'easeOut' }}
-            className="mx-4 mb-3 rounded-3xl border border-white/10 bg-zinc-950/90 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl lg:hidden"
+            className="mx-4 mb-3 rounded-3xl border border-white/10 bg-zinc-950/90 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-lg lg:hidden"
           >
             <div className="space-y-2">
               {navItems.map((item, index) => (
