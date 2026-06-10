@@ -22,7 +22,6 @@ import {
   SearchCheck,
   BrainCircuit,
   ShieldCheck,
-  ArrowRight,
   type LucideIcon,
 } from 'lucide-react';
 import { scrollToSection } from '@/lib/scrollToSection';
@@ -660,7 +659,6 @@ type ProjectStat = {
 
 function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean | null }) {
   const reduceMotion = Boolean(shouldReduceMotion);
-  const [activeCategory, setActiveCategory] = useState('All Projects');
   const [statsVisible, setStatsVisible] = useState(false);
 
   const projects: PortfolioProject[] = [
@@ -756,12 +754,10 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
     },
   ];
 
-  const filters = ['All Projects', ...projects.map((project) => project.category)];
-  const visibleProjects =
-    activeCategory === 'All Projects' ? projects : projects.filter((project) => project.category === activeCategory);
+  const visibleProjects = projects;
 
   const stats: ProjectStat[] = [
-    { value: 9, suffix: '', label: 'Flagship projects' },
+    { value: 60, suffix: '+', label: 'Flagship projects' },
     { value: 5, suffix: '+', label: 'Core business sectors' },
     { value: 30, suffix: '+', label: 'Automation systems' },
     { value: 100, suffix: '%', label: 'Responsive delivery' },
@@ -860,7 +856,7 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
             className="mb-6 sm:mb-8 scroll-mt-28 sm:scroll-mt-32"
           >
             <h2 className="EaseWorkflow-projects-heading text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-              All Projects
+              Projects we do
               <span className="mt-3 block bg-linear-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
                 Premium AI Automation Portfolio
               </span>
@@ -898,42 +894,6 @@ function ProjectsSection({ shouldReduceMotion }: { shouldReduceMotion: boolean |
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Filter bar */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-          className="mb-10 flex flex-wrap items-center justify-center gap-3 sm:mb-14"
-        >
-          {filters.map((filter) => {
-            const isActive = activeCategory === filter;
-            const filterCount = filter === 'All Projects' ? projects.length : projects.filter((project) => project.category === filter).length;
-
-            return (
-              <motion.button
-                key={filter}
-                variants={itemVariants}
-                type="button"
-                onClick={() => setActiveCategory(filter)}
-                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                className={[
-                  'inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 EaseWorkflow-projects-filter',
-                  isActive
-                    ? 'EaseWorkflow-projects-filter--active border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.18),rgba(59,130,246,0.16),rgba(15,23,42,0.7))] text-white shadow-[0_16px_50px_rgba(34,211,238,0.18)]'
-                    : 'border-white/10 bg-white/5 text-zinc-300 hover:border-cyan-300/20 hover:bg-white/8 hover:text-white',
-                ].join(' ')}
-              >
-                <span>{filter}</span>
-                <span className={['EaseWorkflow-projects-filter-count rounded-full px-2 py-0.5 text-xs font-semibold', isActive ? 'bg-white/14 text-white' : 'bg-white/8 text-zinc-400'].join(' ')}>
-                  {filterCount}
-                </span>
-              </motion.button>
-            );
-          })}
         </motion.div>
 
         {/* Projects Grid */}
@@ -1040,11 +1000,7 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_48%)]" />
 
           <div className="absolute inset-0 flex flex-col px-4 py-4 sm:px-5 sm:py-5">
-            <div className="EaseWorkflow-projects-category inline-flex self-start items-center rounded-full border border-white/15 bg-slate-950/40 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur-md sm:px-3 sm:text-[10px]">
-              {project.category}
-            </div>
-
-            <div className="flex flex-1 items-center justify-center pt-2">
+            <div className="flex flex-1 items-center justify-center">
               <div className="EaseWorkflow-projects-icon-shell flex h-16 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-[0_16px_42px_rgba(0,0,0,0.2)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105 sm:h-18 sm:w-18">
                 <project.icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
               </div>
@@ -1097,28 +1053,6 @@ function ProjectCard({ project, itemVariants, shouldReduceMotion }: { project: P
             ))}
           </div>
 
-          {/* View Details button */}
-          <motion.div
-            className="mt-2"
-            whileHover={shouldReduceMotion ? undefined : { x: 4 }}
-            transition={{ duration: 0.3 }}
-          >
-            <button
-              type="button"
-              onClick={() => scrollToSection('contact', shouldReduceMotion ? 'auto' : 'smooth')}
-              className="EaseWorkflow-projects-button inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.14),rgba(59,130,246,0.12),rgba(15,23,42,0.72))] px-3 py-1.5 text-[0.78rem] font-semibold text-white shadow-[0_10px_28px_rgba(8,145,178,0.16)] transition-all duration-300 hover:border-cyan-300/35 hover:shadow-[0_14px_36px_rgba(8,145,178,0.22)]"
-              aria-label={`View details for ${project.title}`}
-            >
-              View Details
-              <motion.span
-                animate={{ x: 0 }}
-                whileHover={{ x: shouldReduceMotion ? 0 : 4 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ArrowRight className="h-4 w-4" />
-              </motion.span>
-            </button>
-          </motion.div>
         </div>
 
         {/* Bottom accent line */}
